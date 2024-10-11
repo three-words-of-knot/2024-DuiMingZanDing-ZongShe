@@ -15,6 +15,7 @@
 # include  <algorithm>
 # include  <string>
 # include  <stack>
+# include  <vector>
 
 # include  "pform.h"
 # include  "parse_api.h"
@@ -33,6 +34,7 @@ using namespace std;
 
 # include  "Mynetlist.h"
 
+# include  "myBlifToV.h"
 
 /* Count errors detected in flag processing. */
 unsigned flag_errors = 0;
@@ -181,7 +183,9 @@ void remove_brackets(std::string& line) {
 
 int main(int argc, char*argv[])
 {
-
+	vector<vector<int>> map_node;
+	vector<char> map_name;
+	BlifToV(map_node,map_name);
 	const std::string inputFileName = "op_exp0_bracket.v";
 	const std::string tempFileName = "temp_op_exp0_bracket.v";
 
