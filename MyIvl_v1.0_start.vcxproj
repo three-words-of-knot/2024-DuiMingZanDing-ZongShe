@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ivl\acc_user.h" />
+    <ClInclude Include="ivl\AStatement.h" />
+    <ClInclude Include="ivl\Attrib.h" />
+    <ClInclude Include="ivl\compiler.h" />
+    <ClInclude Include="ivl\config.h" />
+    <ClInclude Include="ivl\dirent.h" />
+    <ClInclude Include="ivl\discipline.h" />
+    <ClInclude Include="ivl\functor.h" />
+    <ClInclude Include="ivl\getopt.h" />
+    <ClInclude Include="ivl\HName.h" />
+    <ClInclude Include="ivl\ivl_alloc.h" />
+    <ClInclude Include="ivl\ivl_assert.h" />
+    <ClInclude Include="ivl\ivl_target.h" />
+    <ClInclude Include="ivl\ivl_target_priv.h" />
+    <ClInclude Include="ivl\lexor_keyword.h" />
+    <ClInclude Include="ivl\Module.h" />
+    <ClInclude Include="ivl\Mynetlist.h" />
+    <ClInclude Include="ivl\named.h" />
+    <ClInclude Include="ivl\netclass.h" />
+    <ClInclude Include="ivl\netdarray.h" />
+    <ClInclude Include="ivl\netenum.h" />
+    <ClInclude Include="ivl\netlist.h" />
+    <ClInclude Include="ivl\netmisc.h" />
+    <ClInclude Include="ivl\netparray.h" />
+    <ClInclude Include="ivl\netqueue.h" />
+    <ClInclude Include="ivl\netscalar.h" />
+    <ClInclude Include="ivl\netstruct.h" />
+    <ClInclude Include="ivl\nettypes.h" />
+    <ClInclude Include="ivl\netvector.h" />
+    <ClInclude Include="ivl\parse.h" />
+    <ClInclude Include="ivl\parse_api.h" />
+    <ClInclude Include="ivl\parse_misc.h" />
+    <ClInclude Include="ivl\PClass.h" />
+    <ClInclude Include="ivl\PDelays.h" />
+    <ClInclude Include="ivl\PEvent.h" />
+    <ClInclude Include="ivl\PExpr.h" />
+    <ClInclude Include="ivl\pform.h" />
+    <ClInclude Include="ivl\pform_types.h" />
+    <ClInclude Include="ivl\PGate.h" />
+    <ClInclude Include="ivl\PGenerate.h" />
+    <ClInclude Include="ivl\PModport.h" />
+    <ClInclude Include="ivl\PNamedItem.h" />
+    <ClInclude Include="ivl\PPackage.h" />
+    <ClInclude Include="ivl\property_qual.h" />
+    <ClInclude Include="ivl\PScope.h" />
+    <ClInclude Include="ivl\PSpec.h" />
+    <ClInclude Include="ivl\PTask.h" />
+    <ClInclude Include="ivl\PUdp.h" />
+    <ClInclude Include="ivl\PWire.h" />
+    <ClInclude Include="ivl\Statement.h" />
+    <ClInclude Include="ivl\svector.h" />
+    <ClInclude Include="ivl\sv_vpi_user.h" />
+    <ClInclude Include="ivl\t-dll.h" />
+    <ClInclude Include="ivl\target.h" />
+    <ClInclude Include="ivl\util.h" />
+    <ClInclude Include="ivl\utils.h" />
+    <ClInclude Include="ivl\verinum.h" />
+    <ClInclude Include="ivl\verireal.h" />
+    <ClInclude Include="ivl\veriuser.h" />
+    <ClInclude Include="ivl\version_base.h" />
+    <ClInclude Include="ivl\version_tag.h" />
+    <ClInclude Include="ivl\vpi_user.h" />
+    <ClInclude Include="ivl\_pli_types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ivl\AStatement.cc" />
+    <ClCompile Include="ivl\async.cc" />
+    <ClCompile Include="ivl\Attrib.cc" />
+    <ClCompile Include="ivl\cprop.cc" />
+    <ClCompile Include="ivl\design_dump.cc" />
+    <ClCompile Include="ivl\discipline.cc" />
+    <ClCompile Include="ivl\dup_expr.cc" />
+    <ClCompile Include="ivl\elaborate.cc" />
+    <ClCompile Include="ivl\elaborate_analog.cc" />
+    <ClCompile Include="ivl\elab_expr.cc" />
+    <ClCompile Include="ivl\elab_lval.cc" />
+    <ClCompile Include="ivl\elab_net.cc" />
+    <ClCompile Include="ivl\elab_scope.cc" />
+    <ClCompile Include="ivl\elab_sig.cc" />
+    <ClCompile Include="ivl\elab_sig_analog.cc" />
+    <ClCompile Include="ivl\elab_type.cc" />
+    <ClCompile Include="ivl\emit.cc" />
+    <ClCompile Include="ivl\eval_attrib.cc" />
+    <ClCompile Include="ivl\eval_tree.cc" />
+    <ClCompile Include="ivl\exposenodes.cc" />
+    <ClCompile Include="ivl\expr_synth.cc" />
+    <ClCompile Include="ivl\functor.cc" />
+    <ClCompile Include="ivl\getopt.cc" />
+    <ClCompile Include="ivl\HName.cc" />
+    <ClCompile Include="ivl\lexor.cc" />
+    <ClCompile Include="ivl\lexor_keyword.cc" />
+    <ClCompile Include="ivl\libmisc\LineInfo.cc" />
+    <ClCompile Include="ivl\libmisc\StringHeap.cc" />
+    <ClCompile Include="ivl\link_const.cc" />
+    <ClCompile Include="ivl\load_module.cc" />
+    <ClCompile Include="ivl\main.cc" />
+    <ClCompile Include="ivl\Module.cc" />
+    <ClCompile Include="ivl\Myelaborate.cc" />
+    <ClCompile Include="ivl\Myscope.cc" />
+    <ClCompile Include="ivl\netclass.cc" />
+    <ClCompile Include="ivl\netdarray.cc" />
+    <ClCompile Include="ivl\netenum.cc" />
+    <ClCompile Include="ivl\netlist.cc" />
+    <ClCompile Include="ivl\netmisc.cc" />
+    <ClCompile Include="ivl\netparray.cc" />
+    <ClCompile Include="ivl\netqueue.cc" />
+    <ClCompile Include="ivl\netscalar.cc" />
+    <ClCompile Include="ivl\netstruct.cc" />
+    <ClCompile Include="ivl\nettypes.cc" />
+    <ClCompile Include="ivl\netvector.cc" />
+    <ClCompile Include="ivl\net_analog.cc" />
+    <ClCompile Include="ivl\net_assign.cc" />
+    <ClCompile Include="ivl\net_design.cc" />
+    <ClCompile Include="ivl\net_event.cc" />
+    <ClCompile Include="ivl\net_expr.cc" />
+    <ClCompile Include="ivl\net_func.cc" />
+    <ClCompile Include="ivl\net_func_eval.cc" />
+    <ClCompile Include="ivl\net_link.cc" />
+    <ClCompile Include="ivl\net_modulo.cc" />
+    <ClCompile Include="ivl\net_nex_input.cc" />
+    <ClCompile Include="ivl\net_nex_output.cc" />
+    <ClCompile Include="ivl\net_proc.cc" />
+    <ClCompile Include="ivl\net_scope.cc" />
+    <ClCompile Include="ivl\net_tran.cc" />
+    <ClCompile Include="ivl\net_udp.cc" />
+    <ClCompile Include="ivl\nodangle.cc" />
+    <ClCompile Include="ivl\pad_to_width.cc" />
+    <ClCompile Include="ivl\parse.cc" />
+    <ClCompile Include="ivl\parse_misc.cc" />
+    <ClCompile Include="ivl\PClass.cc" />
+    <ClCompile Include="ivl\PDelays.cc" />
+    <ClCompile Include="ivl\PEvent.cc" />
+    <ClCompile Include="ivl\PExpr.cc" />
+    <ClCompile Include="ivl\pform.cc" />
+    <ClCompile Include="ivl\pform_analog.cc" />
+    <ClCompile Include="ivl\pform_disciplines.cc" />
+    <ClCompile Include="ivl\pform_dump.cc" />
+    <ClCompile Include="ivl\pform_package.cc" />
+    <ClCompile Include="ivl\pform_pclass.cc" />
+    <ClCompile Include="ivl\pform_types.cc" />
+    <ClCompile Include="ivl\PFunction.cc" />
+    <ClCompile Include="ivl\PGate.cc" />
+    <ClCompile Include="ivl\PGenerate.cc" />
+    <ClCompile Include="ivl\PModport.cc" />
+    <ClCompile Include="ivl\PNamedItem.cc" />
+    <ClCompile Include="ivl\PPackage.cc" />
+    <ClCompile Include="ivl\PScope.cc" />
+    <ClCompile Include="ivl\PSpec.cc" />
+    <ClCompile Include="ivl\PTask.cc" />
+    <ClCompile Include="ivl\PUdp.cc" />
+    <ClCompile Include="ivl\PWire.cc" />
+    <ClCompile Include="ivl\Statement.cc" />
+    <ClCompile Include="ivl\symbol_search.cc" />
+    <ClCompile Include="ivl\syn-rules.cc" />
+    <ClCompile Include="ivl\sync.cc" />
+    <ClCompile Include="ivl\synth.cc" />
+    <ClCompile Include="ivl\synth2.cc" />
+    <ClCompile Include="ivl\sys_funcs.cc" />
+    <ClCompile Include="ivl\t-dll-analog.cc" />
+    <ClCompile Include="ivl\t-dll-api.cc" />
+    <ClCompile Include="ivl\t-dll-expr.cc" />
+    <ClCompile Include="ivl\t-dll-proc.cc" />
+    <ClCompile Include="ivl\t-dll.cc" />
+    <ClCompile Include="ivl\target.cc" />
+    <ClCompile Include="ivl\utils.cpp" />
+    <ClCompile Include="ivl\verinum.cc" />
+    <ClCompile Include="ivl\verireal.cc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{0f0a44ab-acf0-4601-990c-7dfb4465a1ec}</ProjectGuid>
+    <RootNamespace>MyIvlv10start</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;HAVE_IOSFWD;_CRT_SECURE_NO_WARNINGS;__MINGW32__;__WIN32__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>ivl;ivl/libmisc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

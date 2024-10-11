@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ivl\dirent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\svector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\compiler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\_pli_types.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\acc_user.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\AStatement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\Attrib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\discipline.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\HName.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\ivl_alloc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\ivl_assert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\ivl_target.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\ivl_target_priv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\lexor_keyword.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\Module.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\named.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netdarray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netenum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netlist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netmisc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netparray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netqueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netscalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netstruct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\nettypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\netvector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\parse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\parse_api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\parse_misc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PDelays.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PExpr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\pform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\pform_types.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PGate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PGenerate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PModport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PNamedItem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PPackage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\property_qual.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PScope.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PSpec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PTask.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PUdp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\PWire.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\Statement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\sv_vpi_user.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\target.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\t-dll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\verinum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\verireal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\veriuser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\version_base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\version_tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\vpi_user.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\getopt.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\Mynetlist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ivl\utils.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ivl\async.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\Attrib.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\cprop.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\design_dump.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\dup_expr.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_expr.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_lval.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_net.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_scope.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_sig.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elaborate.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\emit.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\eval_attrib.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\eval_tree.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\expr_synth.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\functor.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\HName.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\lexor.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\link_const.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\load_module.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\main.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\Module.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_assign.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_design.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_event.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_expr.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_func.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_link.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_modulo.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_nex_input.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_nex_output.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_proc.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_scope.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_udp.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netlist.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netmisc.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\nodangle.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pad_to_width.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\parse.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\parse_misc.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PDelays.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PEvent.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PExpr.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_dump.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PFunction.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PGate.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PSpec.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PTask.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PUdp.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PWire.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\Statement.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\symbol_search.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\sync.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\synth.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\synth2.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\sys_funcs.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\target.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\t-dll.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\t-dll-api.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\t-dll-expr.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\t-dll-proc.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\verinum.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\verireal.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\libmisc\LineInfo.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\libmisc\StringHeap.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_tran.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\nettypes.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_func_eval.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elaborate_analog.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netvector.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netclass.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\AStatement.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\discipline.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_sig_analog.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\elab_type.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\exposenodes.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\lexor_keyword.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\net_analog.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netdarray.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netenum.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netparray.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netqueue.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netscalar.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\netstruct.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PClass.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_analog.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_disciplines.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_package.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_pclass.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\pform_types.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PGenerate.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PModport.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PNamedItem.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PPackage.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\PScope.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\syn-rules.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\t-dll-analog.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\getopt.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\Myelaborate.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\Myscope.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
