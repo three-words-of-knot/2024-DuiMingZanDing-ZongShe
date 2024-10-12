@@ -35,6 +35,7 @@
     <ClInclude Include="ivl\ivl_target_priv.h" />
     <ClInclude Include="ivl\lexor_keyword.h" />
     <ClInclude Include="ivl\Module.h" />
+    <ClInclude Include="ivl\myBlifToV.h" />
     <ClInclude Include="ivl\Mynetlist.h" />
     <ClInclude Include="ivl\named.h" />
     <ClInclude Include="ivl\netclass.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="ivl\utils.cpp" />
     <ClCompile Include="ivl\verinum.cc" />
     <ClCompile Include="ivl\verireal.cc" />
+    <ClCompile Include="myBlifToV.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

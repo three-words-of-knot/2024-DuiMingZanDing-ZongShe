@@ -5,10 +5,18 @@
 #include<stdlib.h>
 #include "myBlifToV.h"
 using namespace std;
-
+#define MAX 50
 //输出输入的位置，需要手动修改
 #define INPUT_BLIF "C:\\Users\\五月\\Desktop\\程序\\input\\test1.blif"
 #define OUTPUT_V "C:\\Users\\五月\\Desktop\\程序\\test100.v"
+
+int FindMap(vector<char> map,char p) {
+	for (int i = 0; i < map.size(); i++)
+		if (map.at(i) == p)
+			return i;
+	cout << "提供数据步骤出问题了" << endl;
+	return -1;
+}
 
 int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 
@@ -95,9 +103,6 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 	vector<vector<char>> equals;
 	vector<char> info;
 	for (int i = 0; i < node.size(); i++) {
-		bool only_flag = false;
-		if (node[i].size() > 2)
-			only_flag = true;
 		vector<char> point;
 		for (int j = 7; j < node[i][0].size(); j += 2)
 			point.push_back(node[i][0].at(j));
@@ -132,9 +137,33 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		equals.push_back(info);
 		info.clear();
 	}
+
 	//给其他程序提供数据
-	for (int i = 0; i < map.size(); i++)
-		cout << map[i] << endl;
+	CHAR = map;
+	vector<vector<int>> INT_T;
+	for (int i = 0; i < map.size(); i++) {	
+		vector<int> T_T;
+		for (int j = 0; j < map.size(); j++) {
+			if (i == j)
+				T_T.push_back(-1);
+			else
+				T_T.push_back(0);
+		}
+		INT_T.push_back(T_T);
+	}
+	for (int i = 0; i < node.size(); i++) {
+		vector<char> temp;
+		for (int j = 7; j < node[i][0].size(); j += 2)
+			temp.push_back(node[i][0][j]);
+		int nodenum = FindMap(map, temp[temp.size() - 1]);
+		if (nodenum > 0) 
+			for (int j = 0; j < temp.size()-1; j++) {
+				int number = FindMap(map,temp[j]);
+				INT_T[number][nodenum] = 1;
+			}
+	}
+	INT = INT_T;
+			
 	//打印
 	if (outfile.is_open()) {
 		string module = model.substr(7);

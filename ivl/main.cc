@@ -186,6 +186,11 @@ int main(int argc, char*argv[])
 	vector<vector<int>> map_node;
 	vector<char> map_name;
 	BlifToV(map_node,map_name);
+	/*
+	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
+	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；
+	* 那么在map_node中，（1，0）就会显示为1，以此类推，为1有关系，为0与-1无关系
+	*/
 	const std::string inputFileName = "op_exp0_bracket.v";
 	const std::string tempFileName = "temp_op_exp0_bracket.v";
 
