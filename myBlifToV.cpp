@@ -4,11 +4,12 @@
 #include<vector>
 #include<stdlib.h>
 #include "myBlifToV.h"
+
 using namespace std;
-#define MAX 50
-//输出输入的位置，需要手动修改
-#define INPUT_BLIF "C:\\Users\\五月\\Desktop\\程序\\input\\test1.blif"
-#define OUTPUT_V "C:\\Users\\五月\\Desktop\\程序\\test100.v"
+
+//文件名字，慎重修改
+#define INPUT_LOCATE "\\input\\test1.blif"
+#define OUTPUT_LOCATE "\\test100.v"
 
 int FindMap(vector<char> map,char p) {
 	for (int i = 0; i < map.size(); i++)
@@ -18,9 +19,26 @@ int FindMap(vector<char> map,char p) {
 	return -1;
 }
 
+//寻找文件的文件夹位置
+string getDirectory(const std::string& filePath) {
+	size_t lastSlash = filePath.find_last_of("/\\");
+
+	if (lastSlash == std::string::npos) {
+		return "";
+	}
+
+	return filePath.substr(0, lastSlash);
+}
+
 int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 
-	ifstream src(INPUT_BLIF);
+	//提升普适性，可以直接在其他地方使用了
+	string locate_temp = __FILE__;
+	string INPUT=getDirectory(locate_temp);	
+	string OUTPUT = INPUT;
+	INPUT += INPUT_LOCATE;
+	OUTPUT += OUTPUT_LOCATE;
+	ifstream src(INPUT);
 	
 	if (src.is_open())
 		cout << "目标文件成功打开" << endl;
@@ -28,7 +46,7 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		cout << "目标文件打开失败，请查看源文件路径下是否存在test1.blif文件" << endl;
 		return 100;
 	}
-	//读取blif文件
+	//读取blif文件，根据四个关键词提出不同的区块，源数据储存在这里的vector和string里
 	string line, model, input, output;
 	vector<string> temp;
 	vector<vector<string>> node;
@@ -78,8 +96,8 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		}
 	}
 
-	ofstream outfile(OUTPUT_V);
-	//处理读取的数据
+	ofstream outfile(OUTPUT_LOCATE);
+	//处理读取的数据，分为两个部分，一个部分为处理节点，一个部分为处理节点之间的关系，直接输出为文档的形式，中间没有处理过程，所以这里没有有效数据
 	vector<char> p_output, p_input, map;
 	for (int i = 8; i < input.size(); i += 2) {
 		p_input.push_back(input.at(i));
@@ -138,7 +156,7 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		info.clear();
 	}
 
-	//给其他程序提供数据
+	//给其他程序提供数据，向外传出节点与节点关系
 	CHAR = map;
 	vector<vector<int>> INT_T;
 	for (int i = 0; i < map.size(); i++) {	
