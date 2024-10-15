@@ -518,5 +518,8 @@
     <ClCompile Include="myBlifToV.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MyMethod.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

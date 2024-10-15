@@ -179,7 +179,10 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		if (nodenum > 0) 
 			for (int j = 0; j < temp.size()-1; j++) {
 				int number = FindMap(map,temp[j]);
-				INT_T[number][nodenum] = 1;
+				if(node[i].size()>2)
+					INT_T[number][nodenum] = 2;
+				else
+					INT_T[number][nodenum] = 1;
 			}
 	}
 	INT = INT_T;

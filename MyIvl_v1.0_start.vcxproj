@@ -188,6 +188,7 @@
     <ClCompile Include="ivl\verinum.cc" />
     <ClCompile Include="ivl\verireal.cc" />
     <ClCompile Include="myBlifToV.cpp" />
+    <ClCompile Include="MyMethod.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
