@@ -38,6 +38,8 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 	string OUTPUT = INPUT;
 	INPUT += INPUT_LOCATE;
 	OUTPUT += OUTPUT_LOCATE;
+	cout<<INPUT<<endl;
+	cout<<OUTPUT<<endl;
 	ifstream src(INPUT);
 	
 	if (src.is_open())
@@ -96,7 +98,7 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 		}
 	}
 
-	ofstream outfile(OUTPUT_LOCATE);
+	ofstream outfile(OUTPUT);
 	//处理读取的数据，分为两个部分，一个部分为处理节点，一个部分为处理节点之间的关系，直接输出为文档的形式，中间没有处理过程，所以这里没有有效数据
 	vector<char> p_output, p_input, map;
 	for (int i = 8; i < input.size(); i += 2) {
