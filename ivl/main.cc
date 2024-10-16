@@ -36,6 +36,8 @@ using namespace std;
 
 # include  "myBlifToV.h"
 
+# include  "MyMethod.h"
+
 /* Count errors detected in flag processing. */
 unsigned flag_errors = 0;
 static unsigned long pre_process_fail_count = 0;
@@ -185,7 +187,8 @@ int main(int argc, char*argv[])
 {
 	vector<vector<int>> map_node;
 	vector<char> map_name;
-	BlifToV(map_node,map_name);
+	vector<int> end;
+	BlifToV(map_node,map_name,end);
 	/*
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；
@@ -196,6 +199,14 @@ int main(int argc, char*argv[])
 			printf("%d ", map_node[i][j]);
 		printf("\n");
 	}
+	for (int i = 0; i < end.size(); i++)
+		printf("%d ", end[i]);
+
+	AFAP(map_node, map_name, end);
+
+
+
+
 
 	const std::string inputFileName = "op_exp0_bracket.v";
 	const std::string tempFileName = "temp_op_exp0_bracket.v";

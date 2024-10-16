@@ -30,7 +30,7 @@ string getDirectory(const std::string& filePath) {
 	return filePath.substr(0, lastSlash);
 }
 
-int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
+int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,  vector<int> &end){
 
 	//提升普适性，可以直接在其他地方使用了
 	string locate_temp = __FILE__;
@@ -186,6 +186,13 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR){
 			}
 	}
 	INT = INT_T;
+
+	vector<int> started;
+	for (int i = 0; i < p_output.size(); i++) {
+		int temp=FindMap(map,p_output.at(i));
+		started.push_back(temp);
+	}
+	end = started;
 			
 	//打印
 	if (outfile.is_open()) {

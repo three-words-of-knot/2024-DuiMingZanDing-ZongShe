@@ -36,6 +36,7 @@
     <ClInclude Include="ivl\lexor_keyword.h" />
     <ClInclude Include="ivl\Module.h" />
     <ClInclude Include="ivl\myBlifToV.h" />
+    <ClInclude Include="ivl\MyMethod.h" />
     <ClInclude Include="ivl\Mynetlist.h" />
     <ClInclude Include="ivl\named.h" />
     <ClInclude Include="ivl\netclass.h" />
