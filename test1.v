@@ -27,7 +27,7 @@ wire l;
 wire m;
 wire n;
 assign g = a|d;
-assign h = ~a&c;
+assign h = a&c;
 assign i = ~c;
 assign j = d|e|f;
 assign k = g|h|i;

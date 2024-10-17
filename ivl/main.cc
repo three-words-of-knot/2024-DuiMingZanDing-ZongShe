@@ -183,25 +183,25 @@ void remove_brackets(std::string& line) {
 	line.erase(std::remove(line.begin(), line.end(), ')'), line.end());
 }
 
-int main(int argc, char*argv[])
+int main(int argc, char* argv[])
 {
 	vector<vector<int>> map_node;
 	vector<char> map_name;
 	vector<int> end;
-	BlifToV(map_node,map_name,end);
+	string Locate = BlifToV(map_node,map_name,end);
 	/*
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；
 	* 那么在map_node中，（1，0）就会显示为1，以此类推，为1有关系，为0与-1无关系
 	*/
-	for (int i = 0; i < map_node.size(); i++) {
+    /*	for (int i = 0; i < map_node.size(); i++) {
 		for (int j = 0; j < map_node[0].size(); j++)
 			printf("%d ", map_node[i][j]);
 		printf("\n");
 	}
 	for (int i = 0; i < end.size(); i++)
 		printf("%d ", end[i]);
-
+    */
 	AFAP(map_node, map_name, end);
 
 	ALAP(map_node, map_name, end);
@@ -288,15 +288,11 @@ int main(int argc, char*argv[])
 
 	flags["-o"] = strdup("a.out");
 
-
-	int arg = 2;
-	while (arg < argc) {
-		perm_string path = filename_strings.make(argv[arg++]);
-		source_files.push_back(path);
-	}
-
+	string token = "test1.v";
+	perm_string path = filename_strings.make(token);
+	source_files.push_back(path);
 	if (source_files.empty()) {
-		cerr << "No input files." << endl;
+		cerr << "No input files.\n" << endl;
 		return 1;
 	}
 

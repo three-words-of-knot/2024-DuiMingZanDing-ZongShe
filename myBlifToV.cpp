@@ -9,7 +9,7 @@ using namespace std;
 
 //文件名字，慎重修改
 #define INPUT_LOCATE "\\input\\test1.blif"
-#define OUTPUT_LOCATE "\\test100.v"
+#define OUTPUT_LOCATE "\\test1.v"
 
 int FindMap(vector<char> map,char p) {
 	for (int i = 0; i < map.size(); i++)
@@ -30,23 +30,21 @@ string getDirectory(const std::string& filePath) {
 	return filePath.substr(0, lastSlash);
 }
 
-int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,  vector<int> &end){
+string BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,  vector<int> &end){
 
 	//提升普适性，可以直接在其他地方使用了
-	string locate_temp = __FILE__;
-	string INPUT=getDirectory(locate_temp);	
-	string OUTPUT = INPUT;
+	string locate_temp = getDirectory(__FILE__);
+	string INPUT, OUTPUT;
+	INPUT = OUTPUT = locate_temp;
 	INPUT += INPUT_LOCATE;
 	OUTPUT += OUTPUT_LOCATE;
-	cout<<INPUT<<endl;
-	cout<<OUTPUT<<endl;
 	ifstream src(INPUT);
 	
 	if (src.is_open())
 		cout << "目标文件成功打开" << endl;
 	else {
 		cout << "目标文件打开失败，请查看源文件路径下是否存在test1.blif文件" << endl;
-		return 100;
+		return NULL;
 	}
 	//读取blif文件，根据四个关键词提出不同的区块，源数据储存在这里的vector和string里
 	string line, model, input, output;
@@ -244,5 +242,5 @@ int BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,  vector<int> &end){
 
 	outfile.close();
 	src.close();
-	return 1;
+	return locate_temp;
 }
