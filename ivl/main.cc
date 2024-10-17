@@ -204,7 +204,7 @@ int main(int argc, char*argv[])
 
 	AFAP(map_node, map_name, end);
 
-
+	ALAP(map_node, map_name, end);
 
 
 
