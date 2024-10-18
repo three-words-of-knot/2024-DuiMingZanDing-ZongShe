@@ -14,6 +14,35 @@ void _printline() {
 	printf("\n");
 }
 
+vector<int> _Clear(vector<vector<int>> map_node) {
+	vector<int> _temp;
+	for (int i = 0; i < map_node.size(); i++) {
+		bool _flag = false;
+		bool _flag2 = false;
+		for (int j = 0; j < map_node.size(); j++) {
+			if (map_node[j][i] == 2) {
+				_flag2 = true;
+				_temp.push_back(2);
+				break;
+			}
+			if (map_node[j][i] == 1)
+				if (_flag) {
+					_flag2 = true;
+					_flag = false;
+					_temp.push_back(1);
+					break;
+				}
+				else
+					_flag = true;
+		}
+		if (_flag)
+			_temp.push_back(3);
+		else if(!_flag2)
+			_temp.push_back(0);
+	}
+	return _temp;
+}
+
 int _DFS(vector<vector<int>> map_node,int node_id,vector<int> &floor) {
 	vector<int> Temp;
 	for (int i = 0; i < map_node.size(); i++) {
@@ -101,4 +130,23 @@ void ALAP(vector<vector<int>> map_node, vector<char> map_name, vector<int> end) 
 	}
 	printf("Ñ­»·½áÊø\n");
 	_printline();
+}
+
+void InfoToCycle(vector<vector<int>> map_node, vector<char> map_name, vector<int> end,int OR,int AND,int NO) {
+
+	vector<int> floor;
+	for (int i = 0; i < map_node.size(); i++)
+		floor.push_back(0);
+	for (int i = 0; i < end.size(); i++)
+		_DFS(map_node, end[i], floor);
+
+	vector<int> _temp =_Clear(map_node);
+	for (int i = 0; i < _temp.size(); i++)
+		printf("%d ", _temp.at(i));
+	printf("\n");
+
+	for (int i = 0; i < floor.size(); i++)
+		printf("%d ", floor.at(i));
+	printf("\n");
+
 }

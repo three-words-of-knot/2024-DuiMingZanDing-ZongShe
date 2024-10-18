@@ -194,18 +194,19 @@ int main(int argc, char* argv[])
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；
 	* 那么在map_node中，（1，0）就会显示为1，以此类推，为1有关系，为0与-1无关系
 	*/
-    /*	for (int i = 0; i < map_node.size(); i++) {
+    	for (int i = 0; i < map_node.size(); i++) {
 		for (int j = 0; j < map_node[0].size(); j++)
 			printf("%d ", map_node[i][j]);
 		printf("\n");
 	}
 	for (int i = 0; i < end.size(); i++)
 		printf("%d ", end[i]);
-    */
+
 	AFAP(map_node, map_name, end);
 
 	ALAP(map_node, map_name, end);
 
+	InfoToCycle(map_node, map_name, end, 1, 1, 1);
 
 
 	const std::string inputFileName = "op_exp0_bracket.v";
