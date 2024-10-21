@@ -28,6 +28,7 @@
     <ClInclude Include="ivl\discipline.h" />
     <ClInclude Include="ivl\functor.h" />
     <ClInclude Include="ivl\getopt.h" />
+    <ClInclude Include="ivl\Hash.h" />
     <ClInclude Include="ivl\HName.h" />
     <ClInclude Include="ivl\ivl_alloc.h" />
     <ClInclude Include="ivl\ivl_assert.h" />

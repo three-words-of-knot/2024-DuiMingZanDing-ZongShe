@@ -132,6 +132,17 @@ void ALAP(vector<vector<int>> map_node, vector<char> map_name, vector<int> end) 
 	_printline();
 }
 
+int _check(int stage, vector<int> floor, vector<int> map,int last) {
+	int _temp=0;
+	for (int i = 0; i < floor.size(); i++)
+		if (floor.at(i) == stage && map.at(i) == 0)
+			_temp++;
+	if (last == _temp)
+		return -1;
+	else
+		return _temp;
+}
+
 void InfoToCycle(vector<vector<int>> map_node, vector<char> map_name, vector<int> end,int OR,int AND,int NO) {
 
 	vector<int> floor;
@@ -139,14 +150,71 @@ void InfoToCycle(vector<vector<int>> map_node, vector<char> map_name, vector<int
 		floor.push_back(0);
 	for (int i = 0; i < end.size(); i++)
 		_DFS(map_node, end[i], floor);
-
 	vector<int> _temp =_Clear(map_node);
+	vector<int> map;
+	for (int i = 0; i < _temp.size(); i++)
+		map.push_back(0);
+	int stage = 1;
+
+
+	for (int i = 0; i < 1000; i++) {
+		if (i == 999) {
+			//cout<<"MyMethod函数中重复出现问题，需要修正" << endl;
+			break;
+		}
+		int _or, _and, _no,_last;
+		_or = OR;
+		_and = AND;
+		_no = NO;
+		_last = -100;
+
+		for (int j = 0; j < 1000; j++) {
+			if (j == 999) {
+				//cout << "MyMethod函数中重复出现问题，需要修正" << endl;
+				break;
+			}
+
+			if (_or > 0)
+				for (int k = 0; k < _temp.size() || _or <= 0; k++)
+					if (floor.at(k) == stage && _temp.at(k) == 1 && map.at(k) == 0) {
+						map.at(k) = 1;
+						_or--;
+					}
+			if (_and > 0)
+				for (int k = 0; k < _temp.size() || _and <= 0; k++)
+					if (floor.at(k) == stage && _temp.at(k) == 2 && map.at(k) == 0) {
+						map.at(k) = 1;
+						_and--;
+					}
+			if (_no > 0)
+				for (int k = 0; k < _temp.size() || _no <= 0; k++)
+					if (floor.at(k) == stage && _temp.at(k) == 3 && map.at(k) == 0) {
+						map.at(k) = 1;
+						_no--;
+					}
+			int _checkPoint=_check(stage, floor, map, _last);
+			if (_checkPoint > 0) {
+				_last = _checkPoint;
+				continue;
+			}
+			else if(_checkPoint==0)
+				break;
+		}
+	}
+
+
+
+
 	for (int i = 0; i < _temp.size(); i++)
 		printf("%d ", _temp.at(i));
 	printf("\n");
 
 	for (int i = 0; i < floor.size(); i++)
 		printf("%d ", floor.at(i));
+	printf("\n");
+
+	for (int i = 0; i < map.size(); i++)
+		printf("%d ", map.at(i));
 	printf("\n");
 
 }
