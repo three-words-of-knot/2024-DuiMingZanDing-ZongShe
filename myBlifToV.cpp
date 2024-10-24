@@ -3,24 +3,18 @@
 #include<string>
 #include<vector>
 #include<stdlib.h>
+
 #include "myBlifToV.h"
+#include "Hash.h"
 
 using namespace std;
 
-//文件名字，慎重修改
-#define INPUT_LOCATE "\\input\\test1.blif"
-#define OUTPUT_LOCATE "\\test1.v"
+//文件名字
+#define INPUT_NAME "\\input\\test1.blif"
+#define OUTPUT_NAME "\\test1.v"
 
-int FindMap(vector<char> map,char p) {
-	for (int i = 0; i < map.size(); i++)
-		if (map.at(i) == p)
-			return i;
-	cout << "提供数据步骤出问题了" << endl;
-	return -1;
-}
+static string _GetDirectory(const std::string& filePath) {
 
-//寻找文件的文件夹位置
-string getDirectory(const std::string& filePath) {
 	size_t lastSlash = filePath.find_last_of("/\\");
 
 	if (lastSlash == std::string::npos) {
@@ -28,219 +22,211 @@ string getDirectory(const std::string& filePath) {
 	}
 
 	return filePath.substr(0, lastSlash);
+
 }
 
-string BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,  vector<int> &end){
+static int _FindInVector(vector<char> _vector, char _target) {
 
-	//提升普适性，可以直接在其他地方使用了
-	string locate_temp = getDirectory(__FILE__);
-	string INPUT, OUTPUT;
-	INPUT = OUTPUT = locate_temp;
-	INPUT += INPUT_LOCATE;
-	OUTPUT += OUTPUT_LOCATE;
-	ifstream src(INPUT);
-	
-	if (src.is_open())
-		cout << "目标文件成功打开" << endl;
-	else {
-		cout << "目标文件打开失败，请查看源文件路径下是否存在test1.blif文件" << endl;
-		return NULL;
-	}
-	//读取blif文件，根据四个关键词提出不同的区块，源数据储存在这里的vector和string里
-	string line, model, input, output;
-	vector<string> temp;
-	vector<vector<string>> node;
-	while (getline(src, line)) {
-		char head = line.front();
-		if (head == '.') {
-			char second = line.at(1);
-			switch (second) {
-			case 'm':model = line;
-				break;
-			case 'i':input = line;
-				break;
-			case 'o':output = line;
-				break;
-			case 'n':
-				while (true) {
-					bool return_flag = false;
-					bool exit_flag = false;
-					temp.push_back(line);
-					while (getline(src, line)) {
-						char point = line.at(1);
-						if (point == 'n') {
-							return_flag = true;
-							break;
-						}
-						else if (point == 'e') {
-							exit_flag = true;
-							break;
-						}
-						else
-							temp.push_back(line);
-					}
-					node.push_back(temp);
-					temp.clear();
-					if (return_flag)
-						continue;
-					if (exit_flag)
+	for (int i = 0; i < _vector.size(); i++)
+		if (_vector.at(i) == _target)
+			return i;
+	return -1;
+
+}
+
+static void _Read(string& model, string& input, string& output, vector<vector<string>>& node, ifstream& src) {
+
+	vector<string> _temp;
+	string _line;
+	bool _flag = true;
+
+	while (getline(src, _line)) {
+		char second = _line.at(1);
+		switch (second) {
+		case 'm':
+			model = _line;
+			break;
+		case 'i':
+			input = _line;
+			break;
+		case 'o':
+			output = _line;
+			break;
+		case 'n':
+			while (_flag) {
+				_temp.push_back(_line);
+				while (getline(src, _line)) {
+					char point = _line.at(1);
+					if (point == 'n')
 						break;
-					cout << "读取循环紊乱，修复读取逻辑" << endl;
+					else if (point == 'e') {
+						_flag = false;
+						break;
+					}
+					else
+						_temp.push_back(_line);
 				}
-				break;
-			case 'e':cout << "出现e开头的队列，请检查读取是否存在问题" << endl;
-				break;
-			default:cout << "出现预期以外数据，读取可能出现问题" << endl;
-				break;
+				node.push_back(_temp);
+				_temp.clear();
 			}
+			break;
+		default:
+			cout << "出现预期以外数据，读取可能出现问题" << endl;
+			break;
 		}
 	}
 
-	ofstream outfile(OUTPUT);
-	//处理读取的数据，分为两个部分，一个部分为处理节点，一个部分为处理节点之间的关系，直接输出为文档的形式，中间没有处理过程，所以这里没有有效数据
-	vector<char> p_output, p_input, map;
+}
+
+/*这两处实用性极差，请后续修改*/
+static void _ProcessNode(vector<char>& _output, vector<char>& _input, vector<char>& _map, string input, string output, vector<vector<string>> node) {
+
 	for (int i = 8; i < input.size(); i += 2) {
-		p_input.push_back(input.at(i));
-		map.push_back(input.at(i));
+		_input.push_back(input.at(i));
+		_map.push_back(input.at(i));
 	}
 	for (int i = 9; i < output.size(); i += 2) {
-		p_output.push_back(output.at(i));
-		map.push_back(output.at(i));
+		_output.push_back(output.at(i));
+		_map.push_back(output.at(i));
 	}
 	for (int i = 0; i < node.size(); i++)
-		for (int j = 7; j < node[i][0].size(); j += 2) {
-			bool flag = false;
-			for (int k = 0; k < map.size(); k++) {
-				if (map[k] == node[i][0].at(j))
-					flag = true;
+		for (int j = 7; j < node.at(i).at(0).size(); j += 2)
+			if (_FindInVector(_map, node.at(i).at(0).at(j)) < 0)
+				_map.push_back(node.at(i).at(0).at(j));
+
+}
+
+static void _ProcessEqual(vector<vector<string>>node, vector<vector<char>>& equals) {
+
+	vector<char>_temp;
+	for (int i = 0; i < node.size(); i++) {
+		vector<char> line;
+		for (int j = 7; j < node.at(i).at(0).size(); j += 2)
+			line.push_back(node.at(i).at(0).at(j));
+		if (node.at(i).size() >= 3) {
+			_temp.push_back(line.back());
+			_temp.push_back('=');
+			for (int j = 0; j < line.size() - 1; j++) {
+				_temp.push_back(line.at(j));
+				_temp.push_back('|');
 			}
-			if (!flag)
-				map.push_back(node[i][0].at(j));
+			_temp.pop_back();
 		}
+		else if (node.at(i).at(1).at(0) == '0') {
+			_temp.push_back(line.back());
+			_temp.push_back('=');
+			_temp.push_back('~');
+			_temp.push_back(line.front());
+
+		}
+		else {
+
+			_temp.push_back(line.back());
+			_temp.push_back('=');
+			for (int j = 0; j < line.size() - 1; j++) {
+				_temp.push_back(line.at(j));
+				_temp.push_back('&');
+			}
+			_temp.pop_back();
+		}
+		equals.push_back(_temp);
+		_temp.clear();
+	}
+
+}
+
+static void _Print(string model, vector<char> _output, vector<char> _input, vector<char> _map, ofstream& outfile, vector<vector<char>> equals) {
+
+	string module = model.substr(7);
+	string _node;
+	for (int i = 0; i < _output.size(); i++) {
+		_node += ", ";
+		_node.push_back(_output.at(i));
+	}
+	for (int i = 0; i < _input.size(); i++) {
+		_node += ", ";
+		_node.push_back(_input.at(i));
+	}
+	string m_temp = "module " + module + "(clk, ret" + _node + ");";
+	outfile << m_temp << endl;
+
+	outfile << "input clk, ret;" << endl;
+
+
+	for (int i = 0; i < _output.size(); i++) {
+		string o_temp = "output ";
+		o_temp.push_back(_output.at(i));
+		o_temp.push_back(';');
+		outfile << o_temp << endl;
+	}
+
+
+	for (int i = 0; i < _input.size(); i++) {
+		string i_temp = "input ";
+		i_temp.push_back(_input.at(i));
+		i_temp.push_back(';');
+		outfile << i_temp << endl;
+	}
+
+
+	for (int i = 0; i < _map.size(); i++) {
+		string w_temp = "wire ";
+		w_temp.push_back(_map.at(i));
+		w_temp.push_back(';');
+		outfile << w_temp << endl;
+	}
+
+	for (int i = 0; i < equals.size(); i++) {
+		string a_temp = "assign ";
+		for (int j = 0; j < equals.at(i).size(); j++)
+			a_temp.push_back(equals.at(i).at(j));
+		a_temp.push_back(';');
+		outfile << a_temp << endl;
+	}
+
+	outfile << "endmodule" << endl;
+}
+
+HashMap Transform() {
+	string INPUT, OUTPUT;
+	INPUT = OUTPUT = _GetDirectory(__FILE__);
+	INPUT += INPUT_NAME;
+	OUTPUT += OUTPUT_NAME;
+
+	ifstream src(INPUT);
+	ofstream outfile(OUTPUT);
+	if (src.is_open())
+		cout << "目标文件成功打开" << endl;
+	else
+		cout << "目标文件打开失败，请查看源文件路径下是否存在test1.blif文件" << endl;
+
+	string line, model, input, output;
+
+	vector<string> temp;
+
+	vector<vector<string>> node;
+
+	_Read(model, input, output, node, src);
+
+	vector<char> _output, _input, _map;
+
+	_ProcessNode(_output, _input, _map, input, output, node);
 
 	vector<vector<char>> equals;
-	vector<char> info;
-	for (int i = 0; i < node.size(); i++) {
-		vector<char> point;
-		for (int j = 7; j < node[i][0].size(); j += 2)
-			point.push_back(node[i][0].at(j));
-		for (int j = 1; j < node[i].size(); j++) {
-			if (j > 1)
-				info.push_back('|');
-			int num = 0, temp = 0;
-			for (int k = 0; k < point.size() - 1; k++)
-				if (node[i][j].at(k) != '-')
-					num++;
-			if (num > 1 && node[i].size() > 2)
-				info.push_back('(');
-			for (int k = 0; k < point.size() - 1; k++) {
-				if (node[i][j].at(k) == '1') {
-					if (temp > 0)
-						info.push_back('&');
-					info.push_back(point[k]);
-					temp++;
-				}
-				if (node[i][j].at(k) == '0') {
-					if (temp > 0)
-						info.push_back('&');
-					info.push_back('~');
-					info.push_back(point[k]);
-					temp++;
-				}
-			}
-			if (num > 1 && node[i].size() > 2)
-				info.push_back(')');
-		}
-		info.push_back(point[point.size() - 1]);
-		equals.push_back(info);
-		info.clear();
-	}
 
-	//给其他程序提供数据，向外传出节点与节点关系
-	CHAR = map;
-	vector<vector<int>> INT_T;
-	for (int i = 0; i < map.size(); i++) {	
-		vector<int> T_T;
-		for (int j = 0; j < map.size(); j++) {
-			if (i == j)
-				T_T.push_back(-1);
-			else
-				T_T.push_back(0);
-		}
-		INT_T.push_back(T_T);
-	}
-	for (int i = 0; i < node.size(); i++) {
-		vector<char> temp;
-		for (int j = 7; j < node[i][0].size(); j += 2)
-			temp.push_back(node[i][0][j]);
-		int nodenum = FindMap(map, temp[temp.size() - 1]);
-		if (nodenum > 0) 
-			for (int j = 0; j < temp.size()-1; j++) {
-				int number = FindMap(map,temp[j]);
-				if(node[i].size()>2)
-					INT_T[number][nodenum] = 2;
-				else
-					INT_T[number][nodenum] = 1;
-			}
-	}
-	INT = INT_T;
+	_ProcessEqual(node, equals);
 
-	vector<int> started;
-	for (int i = 0; i < p_output.size(); i++) {
-		int temp=FindMap(map,p_output.at(i));
-		started.push_back(temp);
-	}
-	end = started;
-			
-	//打印
+	HashMap map;
+	//返回数据
+	map.Initialization(_map, node);
+
 	if (outfile.is_open()) {
-		string module = model.substr(7);
-		string r_node;
-		for (int i = 0; i < p_output.size(); i++) {
-			r_node += ", ";
-			r_node.push_back(p_output[i]);
-		}
-		for (int i = 0; i < p_input.size(); i++) {
-			r_node += ", ";
-			r_node.push_back(p_input[i]);
-		}
-		string m_temp = "module " + module + "(clk, ret" + r_node + ");";
-		outfile << m_temp << endl;
-		outfile << "input clk, ret;" << endl;
-		for (int i = 0; i < p_output.size(); i++) {
-			string o_temp = "output ";
-			o_temp.push_back(p_output[i]);
-			o_temp.push_back(';');
-			outfile << o_temp << endl;
-		}
-		for (int i = 0; i < p_input.size(); i++) {
-			string i_temp = "input ";
-			i_temp.push_back(p_input[i]);
-			i_temp.push_back(';');
-			outfile << i_temp << endl;
-		}
-		for (int i = 0; i < map.size(); i++) {
-			string w_temp = "wire ";
-			w_temp.push_back(map[i]);
-			w_temp.push_back(';');
-			outfile << w_temp << endl;
-		}
-		for (int i = 0; i < equals.size(); i++) {
-			string a_temp = "assign ";
-			a_temp.push_back(equals[i][equals[i].size() - 1]);
-			a_temp += " = ";
-			for (int j = 0; j < equals[i].size() - 1; j++)
-				a_temp.push_back(equals[i][j]);
-			a_temp.push_back(';');
-			outfile << a_temp << endl;
-		}
-		outfile << "endmodule" << endl;
+		_Print(model, _output, _input, _map, outfile, equals);
 		cout << "文件打印完成" << endl;
 	}
 	else
 		cout << "verliog文件未成功打开，请检查写入部分" << endl;
-
 	outfile.close();
 	src.close();
-	return locate_temp;
+	return map;
 }

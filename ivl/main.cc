@@ -38,6 +38,8 @@ using namespace std;
 
 # include  "MyMethod.h"
 
+# include  "Hash.h"
+
 /* Count errors detected in flag processing. */
 unsigned flag_errors = 0;
 static unsigned long pre_process_fail_count = 0;
@@ -184,7 +186,16 @@ void remove_brackets(std::string& line) {
 }
 
 int main(int argc, char* argv[])
-{
+{	
+	HashMap Mapper = Transform();
+
+	for (int i = 0; i < Mapper.nodeName.size(); i++) {
+		printf("%d ", Mapper.nodeMap.at(i));
+	}
+
+	for (int i = 0; i < Mapper.nodeName.size(); i++)
+		printf("%c ", Mapper.nodeName.at(i));
+	/*
 	vector<vector<int>> map_node;
 	vector<char> map_name;
 	vector<int> end;
@@ -193,7 +204,7 @@ int main(int argc, char* argv[])
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；
 	* 那么在map_node中，（1，0）就会显示为1，以此类推，为1有关系，为0与-1无关系
-	*/
+
     	for (int i = 0; i < map_node.size(); i++) {
 		for (int j = 0; j < map_node[0].size(); j++)
 			printf("%d ", map_node[i][j]);
@@ -207,6 +218,11 @@ int main(int argc, char* argv[])
 	ALAP(map_node, map_name, end);
 
 	InfoToCycle(map_node, map_name, end, 1, 1, 1);
+	*/
+
+
+
+
 
 
 	const std::string inputFileName = "op_exp0_bracket.v";

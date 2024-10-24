@@ -1,10 +1,11 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include"Hash.h"
 using namespace std;
 #ifndef MYBLIFTOV_H
 #define MYBLIFTOV_H
 
-string BlifToV(vector<vector<int>>& INT, vector<char>& CHAR,vector<int> &end);
+HashMap Transform();
 
 #endif 
