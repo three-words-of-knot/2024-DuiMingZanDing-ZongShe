@@ -13,9 +13,10 @@ public:
 	vector<int> nodeMap;
 	vector<char> nodeName;
 	vector<int> nodeType;
+	int size;
 
 	int FindInNodeMap(int x, int y) {
-		int _temp = x * 10 + y - 1;
+		int _temp = x * size + y - 1;
 		return nodeMap.at(_temp);
 	}
 
@@ -36,6 +37,8 @@ public:
 
 	void Initialization(vector<char> map,vector<vector<string>> node) {
 
+
+		size = map.size();	
 		nodeName = map;
 		for (int i = 0; i < map.size(); i++) {
 			nodeType.push_back(0);
@@ -43,13 +46,11 @@ public:
 				nodeMap.push_back(0);
 		}
 
-
-
 		for (int i = 0; i < node.size(); i++) {
-		    vector<char> _nodeline;
+		    string _nodeline;
 			for (int j = 7; j < node.at(i).at(0).size(); j += 2)
 				_nodeline.push_back(node.at(i).at(0).at(j));
-			if (node.at(i).at(1).at(0) = '0') {
+			if (node.at(i).at(1).at(0) == '0') {
 				ChangeNodeMap(FindName(_nodeline.at(0)), FindName(_nodeline.at(1)), 1);
 				ChangeNodeType(FindName(_nodeline.back()), 1);
 			}
@@ -68,7 +69,7 @@ public:
 private:
 
 	void ChangeNodeMap(int x, int y, int t) {
-		int _temp = x * 10 + y - 1;
+		int _temp = x * size + y - 1;
 		nodeMap.at(_temp) = t;
 	}
 

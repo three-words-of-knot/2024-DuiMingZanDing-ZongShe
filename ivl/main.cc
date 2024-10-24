@@ -189,12 +189,15 @@ int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
 
-	for (int i = 0; i < Mapper.nodeName.size(); i++) {
-		printf("%d ", Mapper.nodeMap.at(i));
+	for (int i = 0; i < Mapper.size; i++) {
+		for(int j=0;j<Mapper.size;j++)
+		printf("%d ", Mapper.nodeMap.at(i*17+j));
+		printf("\n");
 	}
 
 	for (int i = 0; i < Mapper.nodeName.size(); i++)
 		printf("%c ", Mapper.nodeName.at(i));
+	printf("\n");
 	/*
 	vector<vector<int>> map_node;
 	vector<char> map_name;
