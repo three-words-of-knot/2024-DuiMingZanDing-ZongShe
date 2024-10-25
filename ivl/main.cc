@@ -191,18 +191,17 @@ int main(int argc, char* argv[])
 
 	for (int i = 0; i < Mapper.size; i++) {
 		for(int j=0;j<Mapper.size;j++)
-		printf("%d ", Mapper.nodeMap.at(i*17+j));
+		printf("%d ", Mapper.nodeMap.at(i*Mapper.size+j));
 		printf("\n");
 	}
 
 	for (int i = 0; i < Mapper.nodeName.size(); i++)
 		printf("%c ", Mapper.nodeName.at(i));
 	printf("\n");
-	/*
-	vector<vector<int>> map_node;
-	vector<char> map_name;
-	vector<int> end;
-	string Locate = BlifToV(map_node,map_name,end);
+
+	AFAP(Mapper);
+
+
 	/*
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；

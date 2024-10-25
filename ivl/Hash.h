@@ -13,10 +13,13 @@ public:
 	vector<int> nodeMap;
 	vector<char> nodeName;
 	vector<int> nodeType;
+	vector<char> endNode;
+	vector<int> nodeFloor;
+	vector<char>startNode;
 	int size;
 
 	int FindInNodeMap(int x, int y) {
-		int _temp = x * size + y - 1;
+		int _temp = x * size + y;
 		return nodeMap.at(_temp);
 	}
 
@@ -35,9 +38,10 @@ public:
 		return -1;
 	}
 
-	void Initialization(vector<char> map,vector<vector<string>> node) {
+	void Initialization(vector<char> map,vector<vector<string>> node,vector<char> _output,vector<char> _input) {
 
-
+		startNode = _input;
+		endNode = _output;
 		size = map.size();	
 		nodeName = map;
 		for (int i = 0; i < map.size(); i++) {
@@ -65,16 +69,58 @@ public:
 				ChangeNodeType(FindName(_nodeline.back()), 3);
 			}
 		}
+
+		NodeFloorInitialization();
+
 	}
 private:
 
 	void ChangeNodeMap(int x, int y, int t) {
-		int _temp = x * size + y - 1;
+
+		int _temp = x * size + y;
 		nodeMap.at(_temp) = t;
+
 	}
 
 	void ChangeNodeType(int x, int t) {
+
 		nodeType.at(x) = t;
+
+	}
+
+	bool FindInStartNode(int target) {
+		char _temp = FindInNodeName(target);
+		for (int i = 0; i < startNode.size(); i++)
+			if (_temp == startNode.at(i))
+				return true;
+		return false;
+	}
+
+	void NodeFloorInitialization() {
+
+		for (int i = 0; i < size; i++)
+			nodeFloor.push_back(0);
+		for (int i = 0; i < endNode.size(); i++)
+			_DFS(FindName(endNode.at(i)));
+
+	}
+
+	int _DFS(int _last) {
+		if (FindInStartNode(_last))
+			return 0;
+		int max = -1;
+		for (int i = 0; i < size; i++) {
+			int result = FindInNodeMap(i, _last);
+			if (result != 0) {
+				int _temp = _DFS(i);
+				if (_temp > max)
+					max = _temp;
+			}
+		}
+		max++;
+		nodeFloor.at(_last) = max;
+		return max;
+
 	}
 };
 #endif 

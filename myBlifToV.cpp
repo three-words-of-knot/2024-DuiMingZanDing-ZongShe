@@ -218,7 +218,7 @@ HashMap Transform() {
 
 	HashMap map;
 	//·µ»ØÊý¾Ý
-	map.Initialization(_map, node);
+	map.Initialization(_map, node,_output,_input);
 
 	if (outfile.is_open()) {
 		_Print(model, _output, _input, _map, outfile, equals);
