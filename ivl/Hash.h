@@ -17,6 +17,7 @@ public:
 	vector<int> nodeFloor;
 	vector<char>startNode;
 	int size;
+	int maxFloor;
 
 	int FindInNodeMap(int x, int y) {
 		int _temp = x * size + y;
@@ -72,8 +73,17 @@ public:
 
 		NodeFloorInitialization();
 
+		MaxFloor();
 	}
 private:
+
+	void MaxFloor() {
+		int max = -1;
+		for (int i = 0; i < nodeFloor.size(); i++)
+			if (nodeFloor.at(i) > max)
+				max = nodeFloor.at(i);
+		maxFloor = max;
+	}
 
 	void ChangeNodeMap(int x, int y, int t) {
 

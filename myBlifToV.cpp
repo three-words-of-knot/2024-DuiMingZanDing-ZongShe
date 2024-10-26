@@ -41,6 +41,10 @@ static void _Read(string& model, string& input, string& output, vector<vector<st
 	bool _flag = true;
 
 	while (getline(src, _line)) {
+		char first = _line.front();
+		if (first == '#')
+			continue;
+
 		char second = _line.at(1);
 		switch (second) {
 		case 'm':

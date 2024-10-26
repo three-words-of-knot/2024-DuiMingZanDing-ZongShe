@@ -8,8 +8,8 @@ using namespace std;
 
 void AFAP(HashMap _map);
 
-void ALAP(vector<vector<int>> map_node, vector<char> map_name, vector<int> end);
+void ALAP(HashMap _map);
 
-void InfoToCycle(vector<vector<int>> map_node, vector<char> map_name, vector<int> end, int OR, int AND, int NO);
+void ToCycle(HashMap _map);
 
 #endif 

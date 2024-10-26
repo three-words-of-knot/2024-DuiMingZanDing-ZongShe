@@ -201,6 +201,9 @@ int main(int argc, char* argv[])
 
 	AFAP(Mapper);
 
+	ALAP(Mapper);
+	
+	ToCycle(Mapper);
 
 	/*
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
