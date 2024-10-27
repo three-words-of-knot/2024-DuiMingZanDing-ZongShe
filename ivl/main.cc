@@ -205,6 +205,8 @@ int main(int argc, char* argv[])
 	
 	ToCycle(Mapper);
 
+	FromCycle(Mapper);
+
 	/*
 	* 使用说明：这里的map_name是指blif中读取的所有节点，而map_node代表map_name对应下的关系
 	* 例如，a在map_name里为第一个，b在map_name里为第二个，a=~b；

@@ -12,4 +12,5 @@ void ALAP(HashMap _map);
 
 void ToCycle(HashMap _map);
 
+void FromCycle(HashMap _map);
 #endif 

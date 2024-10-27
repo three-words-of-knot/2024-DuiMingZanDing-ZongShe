@@ -59,7 +59,7 @@ public:
 				ChangeNodeMap(FindName(_nodeline.at(0)), FindName(_nodeline.at(1)), 1);
 				ChangeNodeType(FindName(_nodeline.back()), 1);
 			}
-			else if (node.at(i).size() > 3) {
+			else if (node.at(i).size() >= 3) {
 				for (int j = 0; j < _nodeline.size() - 1; j++)
 					ChangeNodeMap(FindName(_nodeline.at(j)), FindName(_nodeline.back()), 2);
 				ChangeNodeType(FindName(_nodeline.back()), 2);

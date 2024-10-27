@@ -89,13 +89,6 @@ static void TC_Read(int& AND,int &NO,int &OR) {
 	cin >> AND >> OR >> NO;
 }
 
-static bool _CheckFloor(int floor,vector<int> map,HashMap _map) {
-	for (int i = 0; i < _map.size; i++)
-		if (_map.nodeFloor.at(i) == floor && map.at(i) == 0)
-			return false;
-	return true;
-}
-
 void AFAP(HashMap _map) {
 	vector<vector<int>> list;
 	for (int i = 1; i < 200; i++) {
@@ -141,70 +134,90 @@ void ToCycle(HashMap _map) {
 
 	vector<vector<int>> list;
 	vector<int> temp;
-	vector<int> mapper;
-	int _and, _no, _or,floor=1;
+	int _and, _no, _or;
 	TC_Read(_and, _no, _or);
+	
+	vector<int> mapper;
 	for (int i = 0; i < _map.size; i++)
 		mapper.push_back(0);
+	for (int i = 0; i < _map.startNode.size(); i++) {
+		int temp = _map.FindName(_map.startNode.at(i));
+		if (temp >= 0)
+			mapper.at(temp) = 1;
+	}
 
-	int t_and = _and;
-	int t_no = _no;
-	int t_or = _or;
-	int checkpoint=-1;
+	int AND = _and;
+	int NO = _no;
+	int OR = _or;
 
-	for (int j = 0;j < 200; j++) {
 
-		if (floor > _map.maxFloor) {
-			list.push_back(temp);
+	for (int i = 0; i < 200; i++) {
+
+		int flag = true;
+
+		for (int j = 0; j < mapper.size(); j++)
+			if (mapper.at(j) != 1)
+				flag = false;
+
+		if (flag)
 			break;
+
+		for (int k = 0; k < _map.size; k++) {
+		bool flag_1 = false;
+			for (int j = 0; j < _map.size; j++) {
+				if (_map.FindInNodeMap(j, k) > 0 && mapper.at(j) != 1) {
+					flag_1 = true;
+				}
+			}
+			if (flag_1) {
+				continue;
+			}
+
+			else if (mapper.at(k) == 0)
+				mapper.at(k) = 2;
 		}
 
-		for (int i = 0; i < _map.size; i++) {
-			if (t_and <= 0)
+		for (int j = 0; j < _map.size; j++) {
+			if (AND <= 0)
 				break;
-			if (_map.nodeFloor.at(i) == floor && _map.nodeType.at(i) == 3 && mapper.at(i) == 0) {
-				mapper.at(i) = 1;
-				t_and--;
-				temp.push_back(i);
+			if (_map.nodeType.at(j) == 3 && mapper.at(j) == 2) {
+				mapper.at(j) = 1;
+				AND--;
+				temp.push_back(j);
 			}
 		}
 
-		for (int i = 0; i < _map.size; i++) {
-			if (t_no <= 0)
+		for (int j = 0; j < _map.size; j++) {
+			if (OR <= 0)
 				break;
-			if (_map.nodeFloor.at(i) == floor && _map.nodeType.at(i) == 1 && mapper.at(i) == 0) {
-				mapper.at(i) = 1;
-				t_no--;
-				temp.push_back(i);
+			if (_map.nodeType.at(j) == 2 && mapper.at(j) == 2) {
+				mapper.at(j) = 1;
+				OR--;
+				temp.push_back(j);
 			}
 		}
 
-		for (int i = 0; i < _map.size; i++) {
-			if (t_or <= 0)
+		for (int j = 0; j < _map.size; j++) {
+			if (NO <= 0)
 				break;
-			if (_map.nodeFloor.at(i) == floor && _map.nodeType.at(i) == 2 && mapper.at(i) == 0) {
-				mapper.at(i) = 1;
-				t_or--;
-				temp.push_back(i);
+			if (_map.nodeType.at(j) == 1 && mapper.at(j) == 2) {
+				mapper.at(j) = 1;
+				NO--;
+				temp.push_back(j);
 			}
 		}
 
-		if (temp.empty())
-			break;
-		if (_CheckFloor(floor, mapper, _map)) {
-			floor++;
-			continue;
-		}
-		else {
-			list.push_back(temp);
-			temp.clear();
-			t_and = _and;
-			t_no = _no;
-			t_or = _or;
-		}
+		list.push_back(temp);
+		temp.clear();
+		AND = _and;
+		NO = _no;
+		OR = _or;
 
 	}
 
 	_Print(list, _map);
 }
 
+void FromCycle(HashMap _map) {
+
+}
