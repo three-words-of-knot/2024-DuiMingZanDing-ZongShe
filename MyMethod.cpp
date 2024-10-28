@@ -89,54 +89,10 @@ static void TC_Read(int& AND,int &NO,int &OR) {
 	cin >> AND >> OR >> NO;
 }
 
-void AFAP(HashMap _map) {
-	vector<vector<int>> list;
-	for (int i = 1; i < 200; i++) {
-		vector<int> temp;
-		for (int j = 0; j < _map.size; j++)
-			if (_map.nodeFloor.at(j) == i)
-				temp.push_back(j);
-		if (temp.empty())
-			break;
-		list.push_back(temp);
-	}
-
-	_Print(list, _map);
-}
-
-void ALAP(HashMap _map) {
-
-	vector<vector<int>> list;
-	vector<int> mapper;
-	for (int i = 0; i < _map.size; i++)
-		mapper.push_back(0);
-	int _floornum = 1;
-	for (int i = 0; i <200; i++) {
-		vector<int> temp;
-		for(int j=0;j<_map.size;j++)
-			if (_map.nodeFloor.at(j) == _floornum&&mapper.at(j)==0) {
-				mapper.at(j) = 1;
-				temp.push_back(j);
-				break;
-			}
-		if (temp.empty()) {
-			_floornum++;
-			continue;
-		}
-		list.push_back(temp);
-	}
-
-	_Print(list, _map);
-
-}
-
-void ToCycle(HashMap _map) {
-
-	vector<vector<int>> list;
-	vector<int> temp;
-	int _and, _no, _or;
-	TC_Read(_and, _no, _or);
+static void _Calc(HashMap _map,int _and,int _no,int _or,vector<vector<int>> &list) {
 	
+	vector<int>temp;
+
 	vector<int> mapper;
 	for (int i = 0; i < _map.size; i++)
 		mapper.push_back(0);
@@ -163,7 +119,7 @@ void ToCycle(HashMap _map) {
 			break;
 
 		for (int k = 0; k < _map.size; k++) {
-		bool flag_1 = false;
+			bool flag_1 = false;
 			for (int j = 0; j < _map.size; j++) {
 				if (_map.FindInNodeMap(j, k) > 0 && mapper.at(j) != 1) {
 					flag_1 = true;
@@ -215,9 +171,130 @@ void ToCycle(HashMap _map) {
 
 	}
 
+}
+
+static void _CheckFloor(HashMap _map,vector<int>&max) {
+
+	for (int i = 1; i <= _map.maxFloor; i++) {
+
+		int _and = 0, _or = 0, _no = 0;
+
+		for(int j = 0; j < _map.size;j++)
+			if(_map.nodeFloor.at(j)==i)
+				switch (_map.nodeType.at(j)) {
+				case 1:
+					_no++;
+					break;
+				case 2:
+					_or++;
+					break;
+				case 3:
+					_and++;
+					break;
+				default:
+					break;
+				}
+
+		if (_no > max.at(0))
+			max.at(0) = _no;
+		if (_or > max.at(1))
+			max.at(1) = _or;
+		if (_and > max.at(2))
+			max.at(2) = _and;
+
+	}
+
+}
+
+void AFAP(HashMap _map) {
+	vector<vector<int>> list;
+	for (int i = 1; i < 200; i++) {
+		vector<int> temp;
+		for (int j = 0; j < _map.size; j++)
+			if (_map.nodeFloor.at(j) == i)
+				temp.push_back(j);
+		if (temp.empty())
+			break;
+		list.push_back(temp);
+	}
+
+	_Print(list, _map);
+}
+
+void ALAP(HashMap _map) {
+
+	vector<vector<int>> list;
+	vector<int> mapper;
+	for (int i = 0; i < _map.size; i++)
+		mapper.push_back(0);
+	int _floornum = 1;
+	for (int i = 0; i <200; i++) {
+		vector<int> temp;
+		for(int j=0;j<_map.size;j++)
+			if (_map.nodeFloor.at(j) == _floornum&&mapper.at(j)==0) {
+				mapper.at(j) = 1;
+				temp.push_back(j);
+				break;
+			}
+		if (temp.empty()) {
+			_floornum++;
+			continue;
+		}
+		list.push_back(temp);
+	}
+
+	_Print(list, _map);
+
+}
+
+void ToCycle(HashMap _map) {
+
+	vector<vector<int>> list;
+	int _and, _no, _or;
+	TC_Read(_and, _no, _or);
+	
+	_Calc(_map, _and, _no, _or, list);
+
 	_Print(list, _map);
 }
 
 void FromCycle(HashMap _map) {
+
+	vector<vector<vector<int>>> _check;
+	vector < vector<int>>mapper;
+	vector<int> answer;
+	vector<vector<int>> list;
+	int turn;
+	cout << "请按顺序输入循环次数（例：11）：";
+	cin >> turn;
+
+	vector<int>max;//非 或 与
+	for (int i = 0; i < 3; i++)
+		max.push_back(0);
+
+	_CheckFloor(_map, max);
+
+	for(int i=1;i<=max.at(2);i++)
+		for(int j=1;j<=max.at(1);j++)
+			for (int k = 1; k <= max.at(0); k++){
+				_Calc(_map, i, k, j, list);
+				if (list.size() == turn) {
+					_check.push_back(list);
+					answer.push_back(i);
+					answer.push_back(j);
+					answer.push_back(k);
+					mapper.push_back(answer);
+					answer.clear();
+				}
+				list.clear();
+			}
+
+	if (_check.empty())
+		cout << "这个数据不能实现" << endl;
+	else {
+		cout << "与门数最少为：" << mapper.front().at(0) << endl;
+		cout << "或门数最少为：" << mapper.front().at(1) << endl;
+		cout << "非门数最少为：" << mapper.front().at(2) << endl;
+	}
 
 }

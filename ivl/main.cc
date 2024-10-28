@@ -203,7 +203,7 @@ int main(int argc, char* argv[])
 
 	ALAP(Mapper);
 	
-	ToCycle(Mapper);
+	//ToCycle(Mapper);
 
 	FromCycle(Mapper);
 
