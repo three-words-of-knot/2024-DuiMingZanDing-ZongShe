@@ -1,4 +1,5 @@
 #include<iostream>
+#include <sstream>
 #include<fstream>
 #include<string>
 #include<vector>
@@ -22,15 +23,6 @@ static string _GetDirectory(const std::string& filePath) {
 	}
 
 	return filePath.substr(0, lastSlash);
-
-}
-
-static int _FindInVector(vector<char> _vector, char _target) {
-
-	for (int i = 0; i < _vector.size(); i++)
-		if (_vector.at(i) == _target)
-			return i;
-	return -1;
 
 }
 
@@ -82,84 +74,81 @@ static void _Read(string& model, string& input, string& output, vector<vector<st
 
 }
 
-/*这两处实用性极差，请后续修改*/
-static void _ProcessNode(vector<char>& _output, vector<char>& _input, vector<char>& _map, string input, string output, vector<vector<string>> node) {
+static void _ProcessNode(vector<string>& _output, vector<string>& _input, vector<string>& _map, string input, string output, vector<vector<string>> node) {
 
-	for (int i = 8; i < input.size(); i += 2) {
-		_input.push_back(input.at(i));
-		_map.push_back(input.at(i));
-	}
-	for (int i = 9; i < output.size(); i += 2) {
-		_output.push_back(output.at(i));
-		_map.push_back(output.at(i));
-	}
-	for (int i = 0; i < node.size(); i++)
-		for (int j = 7; j < node.at(i).at(0).size(); j += 2)
-			if (_FindInVector(_map, node.at(i).at(0).at(j)) < 0)
-				_map.push_back(node.at(i).at(0).at(j));
+	string temp;
+	vector<string> node_temp;
+	istringstream inp(input);
+	istringstream outp(output);
 
-}
+	while (inp >> temp)
+		_input.push_back(temp);
+	if(!_input.empty())
+		_input.erase(_input.begin());
+	while (outp >> temp)
+		_output.push_back(temp);
+	if (!_output.empty())
+		_output.erase(_output.begin());
 
-static void _ProcessEqual(vector<vector<string>>node, vector<vector<char>>& equals) {
+	_map.insert(_map.end(), _input.begin(), _input.end());
 
-	vector<char>_temp;
 	for (int i = 0; i < node.size(); i++) {
-		vector<char> line;
-		for (int j = 7; j < node.at(i).at(0).size(); j += 2)
-			line.push_back(node.at(i).at(0).at(j));
-		if (node.at(i).size() >= 3) {
-			_temp.push_back(line.back());
-			_temp.push_back('=');
-			for (int j = 0; j < line.size() - 1; j++) {
-				_temp.push_back(line.at(j));
-				_temp.push_back('|');
-			}
-			_temp.pop_back();
-		}
-		else if (node.at(i).at(1).at(0) == '0') {
-			_temp.push_back(line.back());
-			_temp.push_back('=');
-			_temp.push_back('~');
-			_temp.push_back(line.front());
+		string str = node.at(i).at(0);
+		istringstream iss(str);
+		while (iss >> temp)
+			node_temp.push_back(temp);
+		_map.push_back(node_temp.back());
+	}
 
-		}
-		else {
 
-			_temp.push_back(line.back());
-			_temp.push_back('=');
-			for (int j = 0; j < line.size() - 1; j++) {
-				_temp.push_back(line.at(j));
-				_temp.push_back('&');
-			}
-			_temp.pop_back();
-		}
-		equals.push_back(_temp);
-		_temp.clear();
+}
+
+static void _ProcessEqual(vector<vector<string>>node, vector<vector<string>>& equals) {
+
+	vector<string> temp;
+	string str;
+
+	for (int i = 0; i < node.size(); i++) {
+
+		istringstream iss(node.at(i).at(0));
+		while (iss >> str)
+			temp.push_back(str);
+		if (!temp.empty())
+			temp.erase(temp.begin());
+
+		if (node.at(i).size() >= 3)
+			temp.push_back("3");
+		else if (node.at(i).at(1).at(0) == '0')
+			temp.push_back("1");
+		else
+			temp.push_back("2");
+
+		equals.push_back(temp);
+		temp.clear();
 	}
 
 }
 
-static void _Print(string model, vector<char> _output, vector<char> _input, vector<char> _map, ofstream& outfile, vector<vector<char>> equals) {
+static void _Print(string model, vector<string> _output, vector<string> _input, vector<string> _map, ofstream& outfile, vector<vector<string>> equals) {
 
 	string module = model.substr(7);
 	string _node;
 	for (int i = 0; i < _output.size(); i++) {
 		_node += ", ";
-		_node.push_back(_output.at(i));
+		_node += _output.at(i);
 	}
 	for (int i = 0; i < _input.size(); i++) {
 		_node += ", ";
-		_node.push_back(_input.at(i));
+		_node += _input.at(i);
 	}
 	string m_temp = "module " + module + "(clk, ret" + _node + ");";
 	outfile << m_temp << endl;
-
 	outfile << "input clk, ret;" << endl;
 
 
 	for (int i = 0; i < _output.size(); i++) {
 		string o_temp = "output ";
-		o_temp.push_back(_output.at(i));
+		o_temp+=_output.at(i);
 		o_temp.push_back(';');
 		outfile << o_temp << endl;
 	}
@@ -167,7 +156,7 @@ static void _Print(string model, vector<char> _output, vector<char> _input, vect
 
 	for (int i = 0; i < _input.size(); i++) {
 		string i_temp = "input ";
-		i_temp.push_back(_input.at(i));
+		i_temp+=_input.at(i);
 		i_temp.push_back(';');
 		outfile << i_temp << endl;
 	}
@@ -175,16 +164,40 @@ static void _Print(string model, vector<char> _output, vector<char> _input, vect
 
 	for (int i = 0; i < _map.size(); i++) {
 		string w_temp = "wire ";
-		w_temp.push_back(_map.at(i));
+		w_temp+=_map.at(i);
 		w_temp.push_back(';');
 		outfile << w_temp << endl;
 	}
 
 	for (int i = 0; i < equals.size(); i++) {
 		string a_temp = "assign ";
-		for (int j = 0; j < equals.at(i).size(); j++)
-			a_temp.push_back(equals.at(i).at(j));
-		a_temp.push_back(';');
+		if (equals.at(i).back() == "1") {
+			a_temp += equals.at(i).at(1);
+			a_temp.push_back('=');
+			a_temp.push_back('~');
+			a_temp += equals.at(i).at(0);
+			a_temp.push_back(';');
+		}
+		else if (equals.at(i).back() == "2") {
+			a_temp += equals.at(i).at(equals.at(i).size()-2);
+			a_temp.push_back('=');
+			for (int j = 0; j < equals.at(i).size() - 2; j++) {
+				a_temp += equals.at(i).at(j);	
+				a_temp.push_back('&');
+			}
+			a_temp.pop_back();
+			a_temp.push_back(';');
+		}
+		else if (equals.at(i).back() == "3") {
+			a_temp += equals.at(i).at(equals.at(i).size() - 2);
+			a_temp.push_back('=');
+			for (int j = 0; j < equals.at(i).size() - 2; j++) {
+				a_temp += equals.at(i).at(j);
+				a_temp.push_back('|');
+			}
+			a_temp.pop_back();
+			a_temp.push_back(';');
+		}
 		outfile << a_temp << endl;
 	}
 
@@ -212,17 +225,17 @@ HashMap Transform() {
 
 	_Read(model, input, output, node, src);
 
-	vector<char> _output, _input, _map;
+	vector<string> _output, _input, _map;
 
 	_ProcessNode(_output, _input, _map, input, output, node);
 
-	vector<vector<char>> equals;
+	vector<vector<string>> equals;
 
 	_ProcessEqual(node, equals);
-
+	
 	HashMap map;
-	//返回数据
-	map.Initialization(_map, node,_output,_input);
+
+	map.Initialization(_map, equals, _output, _input);
 
 	if (outfile.is_open()) {
 		_Print(model, _output, _input, _map, outfile, equals);
