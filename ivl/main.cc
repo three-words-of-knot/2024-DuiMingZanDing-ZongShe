@@ -189,8 +189,6 @@ int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
 
-	Mapper.MapCheck();
-
 	AFAP(Mapper);
 
 	ALAP(Mapper);

@@ -204,7 +204,7 @@ static vector<int> _CheckFloor(HashMap map) {
 	return vec;
 }
 
-static vector<int> _Compare(vector<vector<int>> answers) {
+static vector<int> _Compare(vector<vector<int>> answers, vector<vector<vector<int>>> lists,HashMap map) {
 
 
 	vector<int> vec = answers.at(0);	
@@ -223,7 +223,7 @@ static vector<int> _Compare(vector<vector<int>> answers) {
 			result = i;
 		}
 	}
-
+	_Print(lists.at(result), map);
 	return answers.at(result);
 }
 
@@ -244,30 +244,55 @@ void AFAP(HashMap _map) {
 	_Print(list, _map);
 }
 
-void ALAP(HashMap _map) {
+void ALAP(HashMap map) {
 
-	vector<vector<int>> list;
+	vector<vector<int>>	list;
+	vector<int> vec;
 	vector<int> mapper;
-	for (int i = 0; i < _map.size; i++)
+	int turn;
+	int count = 0;
+	int size = map.size-map.startNode.size();
+
+	cout << "请输入最大轮次（例：11）：";
+	cin >> turn;
+	if (turn < map.maxFloor||turn>size) {
+		cout << "这个数据不能实现" << endl;
+		return;
+	}
+	for (int i = 0; i < map.size; i++)
 		mapper.push_back(0);
-	int _floornum = 1;
-	for (int i = 0; i < 200; i++) {
-		vector<int> temp;
-		for (int j = 0; j < _map.size; j++)
-			if (_map.nodeFloor.at(j) == _floornum && mapper.at(j) == 0) {
+
+	for (int i = 1; i <= map.maxFloor; i++) {
+		bool flag = false;
+		for (int j = 0; j < map.size; j++) {
+
+			if (map.nodeFloor.at(j) == i) {
 				mapper.at(j) = 1;
-				temp.push_back(j);
-				break;
+				count++;
+				vec.push_back(j);
 			}
-		if (temp.empty()) {
-			_floornum++;
-			continue;
+
+			if (i + size - count == turn)
+				flag = true;
+			if (flag)
+				break;
 		}
-		list.push_back(temp);
+		list.push_back(vec);
+		vec.clear();
+		if (flag)
+			break;
 	}
 
-	_Print(list, _map);
+	for (int i = 1; i <= map.maxFloor; i++)
+		for(int j=0;j<map.size;j++)
+			if (map.nodeFloor.at(j) == i && mapper.at(j) == 0) {
+				mapper.at(j) = 1;
+				vec.push_back(j);	
+				list.push_back(vec);
+				vec.clear();
+			}
 
+	_Print(list, map);
 }
 
 void ToCycle(HashMap map) {
@@ -283,30 +308,30 @@ void ToCycle(HashMap map) {
 void FromCycle(HashMap map) {
 
 	vector<int> max = _CheckFloor(map);//与或非
-	vector<int> vec;
+	vector<vector<vector<int>>> lists;
 	vector<vector<int>> answers;
 	int turn;
-	cout << "请按顺序输入循环次数（例：11）：";
+	cout << "请输入进行轮次（例：11）：";
 	cin >> turn;
 
 	for(int i=1;i<=max.at(0);i++)
 		for(int j=1;j<=max.at(1);j++)
 			for (int k = 1; k <= max.at(2); k++) {
 				vector<vector<int>> list = _Calc(map, i, k, j);
-				if (list.size() == turn) {
+				if (list.size() == turn) {	
+					vector<int> vec;
 					vec.push_back(i);
 					vec.push_back(j);
 					vec.push_back(k);
 					answers.push_back(vec);
-					vec.clear();
+					lists.push_back(list);
 				}
-				list.clear();
 			}
 
 	if (answers.empty())
 		cout << "这个数据不能实现" << endl;
 	else {	
-		vector<int> answer = _Compare(answers);
+		vector<int> answer = _Compare(answers,lists,map);
 		cout << "与门数最少为：" << answer.at(0) << endl;
 		cout << "或门数最少为：" << answer.at(1) << endl;
 		cout << "非门数最少为：" << answer.at(2) << endl;
