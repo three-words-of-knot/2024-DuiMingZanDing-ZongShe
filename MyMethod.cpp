@@ -17,7 +17,7 @@ static void _Print(vector<vector<int>> _list,HashMap _map) {
 		i_temp.push_back(',');
 	}
 	i_temp.pop_back();
-	cout<<i_temp<<endl;
+	cout<<i_temp<<" ";
 
 	string o_temp = "Output :";
 	for (int i = 0; i < _map.endNode.size(); i++){
@@ -83,6 +83,83 @@ static void _Print(vector<vector<int>> _list,HashMap _map) {
 
 
 		cout <<n_temp <<endl;
+	}
+}
+
+static void _Print(vector<vector<int>> _list, HashMap _map,vector<int> max) {
+
+	string i_temp = "Input :";
+	for (int i = 0; i < _map.startNode.size(); i++) {
+		i_temp += _map.startNode.at(i);
+		i_temp.push_back(',');
+	}
+	i_temp.pop_back();
+	cout << i_temp << " ";
+
+	string o_temp = "Output :";
+	for (int i = 0; i < _map.endNode.size(); i++) {
+		o_temp += _map.endNode.at(i);
+		o_temp.push_back(',');
+	}
+	o_temp.pop_back();
+	cout << o_temp << endl;
+
+	string t_temp = "Total ";
+	t_temp += to_string(_list.size());
+	t_temp += " Cycles";
+	cout << t_temp << ",与门" << max.at(0) << "个，或门" << max.at(1) << "个，非门" << max.at(2) << "个" << endl;;
+
+	for (int i = 0; i < _list.size(); i++) {
+
+		string n_temp = "Cycle ";
+		n_temp += to_string(i + 1);
+		n_temp += ':';
+		vector<string> line_1, line_2, line_3;
+		for (int j = 0; j < _list.at(i).size(); j++) {
+			int target = _list.at(i).at(j);
+			if (_map.nodeType.at(target) == 1)
+				line_1.push_back(_map.nodeName.at(target));
+			else if (_map.nodeType.at(target) == 2)
+				line_2.push_back(_map.nodeName.at(target));
+			else
+				line_3.push_back(_map.nodeName.at(target));
+		}
+
+
+		string temp_2 = "{";
+		for (int j = 0; j < line_2.size(); j++) {
+			temp_2 += line_2.at(j);
+			temp_2.push_back(' ');
+		}
+		if (temp_2.size() > 1)
+			temp_2.pop_back();
+		temp_2.push_back('}');
+		n_temp += temp_2;
+		n_temp.push_back(',');
+
+		string temp_3 = "{";
+		for (int j = 0; j < line_3.size(); j++) {
+			temp_3 += line_3.at(j);
+			temp_3.push_back(' ');
+		}
+		if (temp_3.size() > 1)
+			temp_3.pop_back();
+		temp_3.push_back('}');
+		n_temp += temp_3;
+		n_temp.push_back(',');
+
+		string temp_1 = "{";
+		for (int j = 0; j < line_1.size(); j++) {
+			temp_1 += line_1.at(j);
+			temp_1.push_back(' ');
+		}
+		if (temp_1.size() > 1)
+			temp_1.pop_back();
+		temp_1.push_back('}');
+		n_temp += temp_1;
+
+
+		cout << n_temp << endl;
 	}
 }
 
@@ -166,6 +243,41 @@ static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 	return result;
 }
 
+static void _ZeroCalc(HashMap map,vector<int> max,int turn, vector<vector<int>> &answers, vector<vector<vector<int>>> &lists) {
+
+	int A = max.at(0), O = max.at(1), N = max.at(2);
+	if (A != 0)
+		A = 1;
+	if (O != 0)
+		O = 1;
+	if (N != 0)
+		N = 1;
+	vector<int> Vec;
+	Vec.push_back(A);
+	Vec.push_back(O);
+	Vec.push_back(N);
+
+	for (; A <= max.at(0); A++) {
+		for (; O <= max.at(1); O++) {
+			for (; N <= max.at(2); N++) {
+				vector<vector<int>> list = _Calc(map, A, O, N);
+				if (list.size() == turn) {
+					vector<int> vec;
+					vec.push_back(A);
+					vec.push_back(O);
+					vec.push_back(N);
+					answers.push_back(vec);
+					lists.push_back(list);
+				}
+			}
+			N = Vec.at(2);
+		}
+		N = Vec.at(2);
+		O = Vec.at(1);
+	}
+
+}
+
 static vector<int> _CheckFloor(HashMap map) {
 
 	int A=0, N=0, O=0;
@@ -204,7 +316,7 @@ static vector<int> _CheckFloor(HashMap map) {
 	return vec;
 }
 
-static vector<int> _Compare(vector<vector<int>> answers, vector<vector<vector<int>>> lists,HashMap map) {
+static int _Compare(vector<vector<int>> answers) {
 
 
 	vector<int> vec = answers.at(0);	
@@ -212,7 +324,7 @@ static vector<int> _Compare(vector<vector<int>> answers, vector<vector<vector<in
 	for (int i = 0; i < 3; i++)
 		min += answers.at(0).at(i);
 	if (answers.size() == 1)
-		return vec;
+		return 0;
 
 	for (int i = 1; i < answers.size(); i++) {
 		int sum = 0;
@@ -223,8 +335,8 @@ static vector<int> _Compare(vector<vector<int>> answers, vector<vector<vector<in
 			result = i;
 		}
 	}
-	_Print(lists.at(result), map);
-	return answers.at(result);
+
+	return result;
 }
 
 void AFAP(HashMap _map) {
@@ -328,12 +440,19 @@ void FromCycle(HashMap map) {
 				}
 			}
 
+
+	for (int i = 0; i < 3; i++) 
+		if (max.at(i) == 0) {
+			_ZeroCalc(map,max,turn,answers,lists);
+
+			break;
+		}
+
+
 	if (answers.empty())
 		cout << "这个数据不能实现" << endl;
 	else {	
-		vector<int> answer = _Compare(answers,lists,map);
-		cout << "与门数最少为：" << answer.at(0) << endl;
-		cout << "或门数最少为：" << answer.at(1) << endl;
-		cout << "非门数最少为：" << answer.at(2) << endl;
+		int id = _Compare(answers);
+		_Print(lists.at(id), map, answers.at(id));
 	}
 }

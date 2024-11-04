@@ -11,20 +11,8 @@
 using namespace std;
 
 //ÎÄ¼þÃû×Ö
-#define INPUT_NAME "\\input\\test1.blif"
-#define OUTPUT_NAME "\\test1.v"
-
-static string _GetDirectory(const std::string& filePath) {
-
-	size_t lastSlash = filePath.find_last_of("/\\");
-
-	if (lastSlash == std::string::npos) {
-		return "";
-	}
-
-	return filePath.substr(0, lastSlash);
-
-}
+#define INPUT "test1.blif"
+#define OUTPUT "test1.v"
 
 static void _Read(string& model, string& input, string& output, vector<vector<string>>& node, ifstream& src) {
 
@@ -205,10 +193,6 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 }
 
 HashMap Transform() {
-	string INPUT, OUTPUT;
-	INPUT = OUTPUT = _GetDirectory(__FILE__);
-	INPUT += INPUT_NAME;
-	OUTPUT += OUTPUT_NAME;
 
 	ifstream src(INPUT);
 	ofstream outfile(OUTPUT);

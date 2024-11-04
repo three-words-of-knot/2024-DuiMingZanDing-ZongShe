@@ -189,13 +189,15 @@ int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
 
-	AFAP(Mapper);
+	//AFAP(Mapper);
 
-	ALAP(Mapper);
+	//ALAP(Mapper);
 	
-	ToCycle(Mapper);
+	//ToCycle(Mapper);
 
 	FromCycle(Mapper);
+
+	system("pause");
 
 	const std::string inputFileName = "op_exp0_bracket.v";
 	const std::string tempFileName = "temp_op_exp0_bracket.v";

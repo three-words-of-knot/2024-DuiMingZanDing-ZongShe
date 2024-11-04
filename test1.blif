@@ -1,0 +1,16 @@
+.model full_adder
+.inputs A B Cin
+.outputs S Cout
+.names A B Cin Sum1
+111 1 
+.names A B P1
+11 1   
+.names B Cin P2
+11 1 
+.names A Cin P3
+11 1 
+.names P1 P2 P3 Cout
+111 1  
+.names Sum1 S
+1 1    
+.end
