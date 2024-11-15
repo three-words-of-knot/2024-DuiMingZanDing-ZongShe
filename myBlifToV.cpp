@@ -196,7 +196,7 @@ HashMap Transform() {
 	string ip ,op;
 	cout << "输入文件名字为（例 test1.blif）：";
 	cin >> ip;
-	cout << "输入文件名字为（例 test1.blif）：";
+	cout << "输出文件名字为（例 test1.v）：";
 	cin >> op;
 	ifstream src(ip);
 	ofstream outfile(op);
