@@ -193,9 +193,13 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 }
 
 HashMap Transform() {
-
-	ifstream src(INPUT);
-	ofstream outfile(OUTPUT);
+	string ip ,op;
+	cout << "输入文件名字为（例 test1.blif）：";
+	cin >> ip;
+	cout << "输入文件名字为（例 test1.blif）：";
+	cin >> op;
+	ifstream src(ip);
+	ofstream outfile(op);
 	if (src.is_open())
 		cout << "目标文件成功打开" << endl;
 	else
