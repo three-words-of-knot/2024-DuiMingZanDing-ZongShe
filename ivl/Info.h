@@ -21,9 +21,6 @@ public:
 		doorInfo.push_back(vec2);
 		doorInfo.push_back(vec1);
 		doorInfo.push_back(vec3);
-		for(int i=0;i<3;i++)
-		cout << doorCost.at(i);
-		cout << endl;
 	}
 
 	int CheckDoor(int type) {
@@ -59,7 +56,6 @@ public:
 private:
 	void _push(vector<int> &mapper) {
 		int id = saveLoad.front();
-		cout << id << endl;
 		saveLoad.erase(saveLoad.begin());
 		mapper.at(id) = 1;
 	}

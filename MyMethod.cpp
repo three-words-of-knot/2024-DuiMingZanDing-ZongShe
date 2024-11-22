@@ -194,10 +194,7 @@ static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 				mapper.at(j) = 2;
 		}
 		//¸ßÁÁ½Úµã
-		for (int o = 0; o < mapper.size(); o++) {
-			cout << mapper.at(o);
-		}
-		cout << endl;
+
 		bool _check = true;
 		for (int j = 0; j < map.size; j++)
 			if (mapper.at(j) != 1)
