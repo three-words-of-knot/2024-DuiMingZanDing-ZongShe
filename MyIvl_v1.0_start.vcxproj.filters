@@ -213,6 +213,9 @@
     <ClInclude Include="ivl\Hash.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ivl\Info.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ivl\async.cc">

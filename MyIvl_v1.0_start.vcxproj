@@ -30,6 +30,7 @@
     <ClInclude Include="ivl\getopt.h" />
     <ClInclude Include="ivl\Hash.h" />
     <ClInclude Include="ivl\HName.h" />
+    <ClInclude Include="ivl\Info.h" />
     <ClInclude Include="ivl\ivl_alloc.h" />
     <ClInclude Include="ivl\ivl_assert.h" />
     <ClInclude Include="ivl\ivl_target.h" />

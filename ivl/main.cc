@@ -189,13 +189,7 @@ int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
 
-	//AFAP(Mapper);
-
-	//ALAP(Mapper);
-	
-	//ToCycle(Mapper);
-
-	FromCycle(Mapper);
+	ToCycle(Mapper);
 
 	system("pause");
 

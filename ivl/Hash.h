@@ -10,6 +10,7 @@ using namespace std;
 class HashMap {
 public:
 
+	vector<int> value;
 	vector<vector<int>> nodeMap;//
 	vector<string> nodeName;//
 	vector<int> nodeType;//
@@ -52,6 +53,7 @@ public:
 		vector<int> vec;
 
 		for (int i = 0; i < size; i++) {
+			value.push_back(0);
 			nodeFloor.push_back(0);
 			nodeType.push_back(0);
 			nodeMap.push_back(vec);

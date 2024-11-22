@@ -6,6 +6,7 @@
 
 #include "MyMethod.h"
 #include "Hash.h"
+#include "Info.h"
 
 using namespace std;
 
@@ -165,9 +166,10 @@ static void _Print(vector<vector<int>> _list, HashMap _map,vector<int> max) {
 
 static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 
+	Info Cost;
 	vector<vector<int>> result;
 	vector<int> temp, mapper;
-	int A=AND, N=NO, O=OR;
+	Cost.Initialization(3, 2, 1, OR, AND, NO);
 
 	for (int i = 0; i < map.size; i++)
 		mapper.push_back(0);
@@ -178,13 +180,13 @@ static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 	}
 
 	for (int i = 0; i < 200; i++) {
-
+		//1代表已完成，2代表可以进行，3代表正在运算
 		for (int j = 0; j < map.size; j++) {
 			bool flag = true;
 			if (!map.nodeMap.at(j).empty()) 
 				for (int k = 0; k < map.nodeMap.at(j).size(); k++) {
 					int id = map.nodeMap.at(j).at(k);
-					if (mapper.at(id) != 1)
+					if (mapper.at(id) !=1)
 						flag = false;
 				}
 
@@ -192,7 +194,10 @@ static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 				mapper.at(j) = 2;
 		}
 		//高亮节点
-
+		for (int o = 0; o < mapper.size(); o++) {
+			cout << mapper.at(o);
+		}
+		cout << endl;
 		bool _check = true;
 		for (int j = 0; j < map.size; j++)
 			if (mapper.at(j) != 1)
@@ -202,41 +207,41 @@ static vector<vector<int>> _Calc(HashMap map,int AND,int NO,int OR) {
 		//检查是否还有未完成节点
 
 		for (int j = 0; j < map.size; j++) {
-			if (A <= 0)
+			int result = Cost.CheckDoor(0);
+			if (result == -1)
 				break;
 			if (map.nodeType.at(j) == 2 && mapper.at(j) == 2) {
-				A--;
-				mapper.at(j) = 1;
+				mapper.at(j) = 3;
 				temp.push_back(j);
+				Cost.UseDoor(0, result,j);
 			}
 		}
 
 		for (int j = 0; j < map.size; j++) {
-			if (N <= 0)
-				break;
-			if (map.nodeType.at(j) == 1 && mapper.at(j) == 2) {
-				N--;
-				mapper.at(j) = 1;
-				temp.push_back(j);
-			}
-		}
-
-		for (int j = 0; j < map.size; j++) {
-			if (O <= 0)
+			int result = Cost.CheckDoor(1);
+			if (result == -1)
 				break;
 			if (map.nodeType.at(j) == 3 && mapper.at(j) == 2) {
-				O--;
-				mapper.at(j) = 1;
+				mapper.at(j) = 3;
 				temp.push_back(j);
+				Cost.UseDoor(1, result,j);
 			}
 		}
 
+		for (int j = 0; j < map.size; j++) {
+			int result = Cost.CheckDoor(2);
+			if (result == -1)
+				break;
+			if (map.nodeType.at(j) == 1 && mapper.at(j) == 2) {
+				mapper.at(j) = 3;
+				temp.push_back(j);
+				Cost.UseDoor(2, result,j);
+			}
+		}
 
+		Cost.Clear(mapper);
 		result.push_back(temp);
 		temp.clear();
-		A = AND;
-		N = NO;
-		O = OR;
 
 	}
 
@@ -456,3 +461,5 @@ void FromCycle(HashMap map) {
 		_Print(lists.at(id), map, answers.at(id));
 	}
 }
+//
+
