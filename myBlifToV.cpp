@@ -11,47 +11,48 @@
 using namespace std;
 
 //文件名字
-#define INPUT "test1.blif"
-#define OUTPUT "test1.v"
+#define NAME "test"
 
 static void _Read(string& model, string& input, string& output, vector<vector<string>>& node, ifstream& src) {
 
-	vector<string> _temp;
-	string _line;
-	bool _flag = true;
+	vector<string> temp;
+	string line;
+	bool flag = true;
 
-	while (getline(src, _line)) {
-		char first = _line.front();
+	while (getline(src, line)) {
+
+		char first = line.front();
 		if (first == '#')
 			continue;
 
-		char second = _line.at(1);
+		char second = line.at(1);
 		switch (second) {
 		case 'm':
-			model = _line;
+			model = line;
 			break;
 		case 'i':
-			input = _line;
+			input = line;
 			break;
 		case 'o':
-			output = _line;
+			output = line;
 			break;
 		case 'n':
-			while (_flag) {
-				_temp.push_back(_line);
-				while (getline(src, _line)) {
-					char point = _line.at(1);
-					if (point == 'n')
-						break;
-					else if (point == 'e') {
-						_flag = false;
-						break;
-					}
-					else
-						_temp.push_back(_line);
+			temp.push_back(line);
+			while (true) {
+				getline(src, line);
+				char checkPoint = line.at(1);
+				if (checkPoint == 'n') {
+					node.push_back(temp);
+					temp.clear();
+					temp.push_back(line);
 				}
-				node.push_back(_temp);
-				_temp.clear();
+				else if (checkPoint == 'e') {
+					node.push_back(temp);
+					temp.clear();
+					break;
+				}
+				else 
+					temp.push_back(line);
 			}
 			break;
 		default:
@@ -62,7 +63,7 @@ static void _Read(string& model, string& input, string& output, vector<vector<st
 
 }
 
-static void _ProcessNode(vector<string>& _output, vector<string>& _input, vector<string>& _map, string input, string output, vector<vector<string>> node) {
+static void _ProcessNode(vector<string>& outputNode, vector<string>& inputNode, vector<string>& nodeMap, string input, string output, vector<vector<string>> node) {
 
 	string temp;
 	vector<string> node_temp;
@@ -70,24 +71,23 @@ static void _ProcessNode(vector<string>& _output, vector<string>& _input, vector
 	istringstream outp(output);
 
 	while (inp >> temp)
-		_input.push_back(temp);
-	if(!_input.empty())
-		_input.erase(_input.begin());
+		inputNode.push_back(temp);
+	if(!inputNode.empty())
+		inputNode.erase(inputNode.begin());
 	while (outp >> temp)
-		_output.push_back(temp);
-	if (!_output.empty())
-		_output.erase(_output.begin());
+		outputNode.push_back(temp);
+	if (!outputNode.empty())
+		outputNode.erase(outputNode.begin());
 
-	_map.insert(_map.end(), _input.begin(), _input.end());
+	nodeMap.insert(nodeMap.end(), inputNode.begin(), inputNode.end());
 
 	for (int i = 0; i < node.size(); i++) {
 		string str = node.at(i).at(0);
 		istringstream iss(str);
 		while (iss >> temp)
 			node_temp.push_back(temp);
-		_map.push_back(node_temp.back());
+		nodeMap.push_back(node_temp.back());
 	}
-
 
 }
 
@@ -104,18 +104,27 @@ static void _ProcessEqual(vector<vector<string>>node, vector<vector<string>>& eq
 		if (!temp.empty())
 			temp.erase(temp.begin());
 
-		if (node.at(i).size() >= 3)
-			temp.push_back("3");
-		else if (node.at(i).at(1).at(0) == '0')
-			temp.push_back("1");
-		else
-			temp.push_back("2");
-
+		string checkLine;
+		checkLine = node.at(i).at(1);
+		for (int j = 0; j < checkLine.size(); j++)
+			if (checkLine.at(j) == '-') {
+				temp.push_back("1");
+				break;
+			}
+			else if (checkLine.at(j) == '0') {
+				temp.push_back("0");
+				break;
+			}
+			else if (checkLine.at(j) == ' ') {
+				temp.push_back("2");
+				break;
+			}
 		equals.push_back(temp);
 		temp.clear();
 	}
 
 }
+//0为非门，1为或门，2为与门
 
 static void _Print(string model, vector<string> _output, vector<string> _input, vector<string> _map, ofstream& outfile, vector<vector<string>> equals) {
 
@@ -159,7 +168,7 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 
 	for (int i = 0; i < equals.size(); i++) {
 		string a_temp = "assign ";
-		if (equals.at(i).back() == "1") {
+		if (equals.at(i).back() == "0") {
 			a_temp += equals.at(i).at(1);
 			a_temp.push_back('=');
 			a_temp.push_back('~');
@@ -176,7 +185,7 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 			a_temp.pop_back();
 			a_temp.push_back(';');
 		}
-		else if (equals.at(i).back() == "3") {
+		else if (equals.at(i).back() == "1") {
 			a_temp += equals.at(i).at(equals.at(i).size() - 2);
 			a_temp.push_back('=');
 			for (int j = 0; j < equals.at(i).size() - 2; j++) {
@@ -193,40 +202,42 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 }
 
 HashMap Transform() {
-	string ip ,op;
-	cout << "输入文件名字为（例 test1.blif）：";
-	cin >> ip;
-	cout << "输出文件名字为（例 test1.v）：";
-	cin >> op;
-	ifstream src(ip);
-	ofstream outfile(op);
+
+	string inputName, outputName, s_temp;
+	inputName = outputName = NAME;
+	cout << "请写入输入文件名字（默认为test）:";
+	getline(cin, s_temp);
+	if (!s_temp.empty())
+		inputName = s_temp;
+	inputName += ".blif";
+	cout << "请写入输出文件名字（默认为test）:";
+	getline(cin, s_temp);
+	if (!s_temp.empty())
+		outputName = s_temp;
+	outputName += ".v";
+
+	ifstream src(inputName);
+	ofstream outfile(outputName);
 	if (src.is_open())
-		cout << "目标文件成功打开" << endl;
+		cout << "输入文件成功打开" << endl;
 	else
-		cout << "目标文件打开失败，请查看源文件路径下是否存在test1.blif文件" << endl;
+		cout << "输入文件打开失败，请查看源文件路径下是否存在" << inputName << "文件" << endl;
 
-	string line, model, input, output;
-
-	vector<string> temp;
-
+	string model, input, output;
 	vector<vector<string>> node;
-
 	_Read(model, input, output, node, src);
 
-	vector<string> _output, _input, _map;
-
-	_ProcessNode(_output, _input, _map, input, output, node);
+	vector<string> outputNode, inputNode, nodeMap;
+	_ProcessNode(outputNode, inputNode, nodeMap, input, output, node);
 
 	vector<vector<string>> equals;
-
 	_ProcessEqual(node, equals);
-	
+
 	HashMap map;
-
-	map.Initialization(_map, equals, _output, _input);
-
+	map.Initialization(nodeMap, equals, outputNode, inputNode);
+	
 	if (outfile.is_open()) {
-		_Print(model, _output, _input, _map, outfile, equals);
+		_Print(model, outputNode, inputNode, nodeMap, outfile, equals);
 		cout << "文件打印完成" << endl;
 	}
 	else

@@ -36,6 +36,7 @@
     <ClInclude Include="ivl\ivl_target.h" />
     <ClInclude Include="ivl\ivl_target_priv.h" />
     <ClInclude Include="ivl\lexor_keyword.h" />
+    <ClInclude Include="ivl\lp.h" />
     <ClInclude Include="ivl\Module.h" />
     <ClInclude Include="ivl\myBlifToV.h" />
     <ClInclude Include="ivl\MyMethod.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="ivl\libmisc\StringHeap.cc" />
     <ClCompile Include="ivl\link_const.cc" />
     <ClCompile Include="ivl\load_module.cc" />
+    <ClCompile Include="ivl\lp.cpp" />
     <ClCompile Include="ivl\main.cc" />
     <ClCompile Include="ivl\Module.cc" />
     <ClCompile Include="ivl\Myelaborate.cc" />

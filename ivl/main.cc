@@ -188,11 +188,29 @@ void remove_brackets(std::string& line) {
 int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
-
-	ToCycle(Mapper);
+	
+	int temp;
+	cout << "请输入需要的功能：" << endl;
+	cin >> temp;
+	switch (temp) {
+	case 1:	
+		AFAP(Mapper);
+		break;
+	case 2:
+		ALAP(Mapper);
+		break;
+	case 3:
+		ToCycle(Mapper);
+		break;
+	case 4:
+		FromCycle(Mapper);
+		break;
+	default:
+		break;
+	}
 
 	system("pause");
-
+	
 	const std::string inputFileName = "op_exp0_bracket.v";
 	const std::string tempFileName = "temp_op_exp0_bracket.v";
 

@@ -216,6 +216,9 @@
     <ClInclude Include="ivl\Info.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ivl\lp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ivl\async.cc">
@@ -528,6 +531,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MyMethod.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ivl\lp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
