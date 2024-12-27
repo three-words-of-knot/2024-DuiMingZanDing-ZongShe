@@ -40,6 +40,8 @@ using namespace std;
 
 # include  "Hash.h"
 
+# include "lp.h"
+
 /* Count errors detected in flag processing. */
 unsigned flag_errors = 0;
 static unsigned long pre_process_fail_count = 0;
@@ -188,7 +190,7 @@ void remove_brackets(std::string& line) {
 int main(int argc, char* argv[])
 {	
 	HashMap Mapper = Transform();
-	
+
 	int temp;
 	cout << "请输入需要的功能：" << endl;
 	cin >> temp;
@@ -206,6 +208,7 @@ int main(int argc, char* argv[])
 		FromCycle(Mapper);
 		break;
 	default:
+		Transformer(Mapper);
 		break;
 	}
 

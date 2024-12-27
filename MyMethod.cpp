@@ -255,3 +255,60 @@ void FromCycle(HashMap map) {
 
 	END:_Print(list, map);
 }
+
+vector<vector<int>> SPUsing(HashMap map,int &max,int &num1,int &num2,int &num3) {
+
+	vector<vector<int>> vec;
+	vector<int> vec_1;
+	for (int i = 0; i < map.size; i++)
+		vec.push_back(vec_1);
+	
+	HashMap Copy_1, Copy_2;
+	Copy_1 = Copy_2 = map;
+
+	int temp_1, temp_2, temp_3;
+	cout << "请按与、或、非门的顺序输入所需要的时间(例：1 1 1)：";
+	cin >> temp_1 >> temp_2 >> temp_3;
+
+	num1 = temp_1;
+	num2 = temp_2;
+	num3 = temp_3;
+
+	Copy_1.DelayTime(10, 10, 10, temp_1, temp_2, temp_3);
+
+	for (int i = 0; i < 200; i++) {
+		bool flag = Copy_1.ListCheck();
+		if (flag)
+			break;
+		vector<int> temp;
+		Copy_1.Update();
+		Copy_1.ClearNode(temp);
+		for (int x = 0; x < temp.size(); x++)
+			vec.at(temp.at(x)).push_back(i);
+		Copy_1.Refresh();
+	}
+
+	vector<vector<int>> list;
+
+	Copy_2.DelayTime(1, 1, 1, temp_1, temp_2, temp_3);
+
+	for (int i = 0; i < 200; i++) {
+		bool flag = Copy_2.ListCheck();
+		if (flag)
+			break;
+		vector<int> temp;
+		Copy_2.Update();
+		Copy_2.ClearNode(temp);
+		for (int x = 0; x < temp.size(); x++)
+			vec.at(temp.at(x)).push_back(i);
+		Copy_2.Refresh();
+		max = i+1;
+	}
+	for (int i = 0; i < vec.size(); i++) {
+		for (int j = 0; j < vec.at(i).size(); j++)
+			cout << vec.at(i).at(j)<<" ";
+		cout << endl;
+	}
+	return vec;
+
+}
