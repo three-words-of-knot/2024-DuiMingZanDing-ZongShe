@@ -146,7 +146,22 @@ static void _Print(vector<vector<int>> vec,HashMap map,ofstream &outfile,int A,i
 		}
 	}
 
-	//≤Ó“ªµ„
+	outfile << "Binary" << endl;
+
+	for (int i = 1; i < A + 1; i++) {
+		for (int j = 0; j < map.size; j++) 
+			if (!map.nodeMap.at(j).empty()) {
+				string temp;
+				temp += "X";
+				temp += map.nodeName.at(j);
+				temp += to_string(i);
+				outfile << temp << endl;
+			}
+		string temp;
+		temp += "XA";
+		temp += to_string(i);
+		outfile << temp << endl;
+	}
 
 }
 

@@ -79,19 +79,6 @@ public:
 
 		}	
 
-
-		for (int i = 0; i < size; i++) {
-			cout << usableNode.at(i) << " ";
-		}
-		cout << endl;
-		cout << endl;
-		for (int i = 0; i < doorList.size(); i++) {
-			for (int j = 0; j < doorList.at(i).size(); j++) {
-				cout << doorList.at(i).at(j) << " ";
-			}
-			cout << endl;
-		}
-		cout << endl;
 	}
 
 	void ClearNode(vector<int> &temp) {
@@ -183,9 +170,6 @@ public:
 
 		UsableNodeInitialize();
 		
-		for (int i = 0; i < size; i++) {
-			cout << usableNode.at(i) << " ";
-		}
 	}
 
 	void UsableNodeUninitialize() {
