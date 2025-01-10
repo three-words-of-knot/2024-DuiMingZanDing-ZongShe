@@ -304,11 +304,7 @@ vector<vector<int>> SPUsing(HashMap map,int &max,int &num1,int &num2,int &num3) 
 		Copy_2.Refresh();
 		max = i+1;
 	}
-	for (int i = 0; i < vec.size(); i++) {
-		for (int j = 0; j < vec.at(i).size(); j++)
-			cout << vec.at(i).at(j)<<" ";
-		cout << endl;
-	}
+
 	return vec;
 
 }

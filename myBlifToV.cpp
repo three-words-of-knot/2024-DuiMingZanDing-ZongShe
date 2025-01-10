@@ -138,9 +138,8 @@ static void _Print(string model, vector<string> _output, vector<string> _input, 
 		_node += ", ";
 		_node += _input.at(i);
 	}
-	string m_temp = "module " + module + "(clk, ret" + _node + ");";
+	string m_temp = "module " + module + "(" + _node + ");";
 	outfile << m_temp << endl;
-	outfile << "input clk, ret;" << endl;
 
 
 	for (int i = 0; i < _output.size(); i++) {

@@ -1,5 +1,4 @@
-module sample(clk, ret, o, p, q, a, b, c, d, e, f);
-input clk, ret;
+module sample(, o, p, q, a, b, c, d, e, f);
 output o;
 output p;
 output q;

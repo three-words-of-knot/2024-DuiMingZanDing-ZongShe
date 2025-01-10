@@ -1,0 +1,31 @@
+.model sample
+.inputs a b c d e f
+.outputs o p q
+.names d a g
+1- 1
+-1 1
+.names c a h
+11 1
+.names c i
+0 1
+.names f e d j
+1-- 1
+-1- 1
+--1 1
+.names i h g k
+1-- 1
+-1- 1
+--1 1
+.names j i h l
+111 1
+.names j i m
+11 1
+.names m l n
+11 1
+.names k h b o
+111 1
+.names g p
+0 1
+.names n q
+0 1
+.end
